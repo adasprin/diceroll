@@ -2,6 +2,7 @@
   <div class="Diceroll">
     <div id="Dicebag">
       <button v-bind:key="dice.id" v-for="dice in Dicebag">{{dice.name}}</button>
+      <Dice></dice>
     </div>
     Тут Лог
     Тут настройке
@@ -10,6 +11,7 @@
 </template>
 
 <script>
+import Dice from '@/components/Dice.vue'
 export default {
   name: 'Diceroll',
   props: {
@@ -26,8 +28,6 @@ export default {
     if (localStorage.Dicebag) {
       this.Dicebag = JSON.parse(localStorage.Dicebag);
     } else {
-      /*localStorage.Dicebag = JSON.stringify(this.defaultDicebag);
-      this.Dicebag = JSON.parse(localStorage.Dicebag);*/
       this.resetDicebag();
     }
   },
@@ -41,7 +41,8 @@ export default {
       localStorage.Dicebag = JSON.stringify(this.defaultDicebag);
       this.Dicebag = JSON.parse(localStorage.Dicebag);
     }
-  }
+  },
+  components: { Dice  }
 }
 </script>
 
