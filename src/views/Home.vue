@@ -1,18 +1,16 @@
 <template>
-  <div class="home">
+  <div id="Home">
     <!--img alt="Vue logo" src="../assets/logo.png"-->
-    <Diceroll msg="Welcome to Your Vue.js App"/>
+    <diceroll/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Diceroll from '@/components/Diceroll.vue'
+import diceroll from '@/components/diceroll.vue'
 
 export default {
   name: 'home',
-  components: {
-    Diceroll
-  }
+  components: {diceroll}
 }
 </script>

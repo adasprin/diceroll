@@ -1,65 +1,79 @@
 <template>
-  <div class="Diceroll">
+  <div id="Diceroll">
     <div id="Dicebag">
-      <button v-bind:key="dice.id" v-for="dice in Dicebag">{{dice.name}}</button>
-      <dice></dice>
+      <dice @rolled='sendRecord' v-bind:quant="dice.quant" v-bind:faces="dice.faces" v-bind:key="index" v-for="(dice, index) in dicebag"/>
     </div>
-    Тут Лог
-    Тут настройке
-    <button @click="resetDicebag">gjxbcnbnm</button>
+    <div id="Table">
+      <log v-bind:result="newRecord"/>
+      <div id="Settings">
+        <button @click="resetdicebag">Сбросить настройки</button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import dice from '@/components/dice.vue'
+import dice from '@/components/dice.vue';
+import log from '@/components/log.vue';
 export default {
-  name: 'Diceroll',
-  props: {
-    msg: String
-  },
+  name: 'diceroll',
   data: function () {
     return {
-      defaultDicebag: [{id: 0, name: 'куб№1'},{id: 3,name: 'куб№2'},{id: 4,name: 'куб№3'}],
-      Dicebag: [],
-      log: []
+      defaultDicebag: [{quant: 1, faces: 4 },{quant: 1, faces: 6},{quant: 1, faces: 8},{quant: 1, faces: 10},{quant: 1, faces: 12},{quant: 1, faces: 20}],
+      dicebag: Array(),
+      newRecord: String(),
+      settings: {
+        opacitybefore: false,
+        sepaeach: 6
+      }
     }
   },
   mounted() {
-    if (localStorage.Dicebag) {
-      this.Dicebag = JSON.parse(localStorage.Dicebag);
+    if (localStorage.dicebag) {
+      this.dicebag = JSON.parse(localStorage.dicebag);
     } else {
-      this.resetDicebag();
+      this.resetdicebag();
     }
   },
   watch: {
-    Dicebag(newDicebag) {
-      localStorage.Dicebag = JSON.stringify(newDicebag);
+    dicebag(newDicebag) {
+      localStorage.dicebag = JSON.stringify(newDicebag);
     }
   },
   methods: {
-    resetDicebag: function(){
-      localStorage.Dicebag = JSON.stringify(this.defaultDicebag);
-      this.Dicebag = JSON.parse(localStorage.Dicebag);
+    // Устанавливаем дефолтные кубы
+    resetdicebag: function(){
+      localStorage.dicebag = JSON.stringify(this.defaultDicebag);
+      this.dicebag = JSON.parse(localStorage.dicebag);
+    },
+    sendRecord (data) {
+      var tstamp = new Date().getTime();
+      this.newRecord = data.string+'_'+ tstamp;
     }
   },
-  components: {dice}
+  components: {dice, log}
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
+<style>
+#Diceroll {
+  margin: 0 auto;
+  min-height: 500px;
+  padding: 20px;
+  color: purple;
+  display: flex;
+  position: relative;
+  background: #ececec;
+  width: 700px;
+  box-shadow: 0 2px 11px rgba(0, 0, 0, .3);
+  border-radius: 2px;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+#Dicebag { flex: 1;}
+#Table { flex: 2;}
+#Settings {
+  background: rgba(1, 1, 1, .5);
+  position: fixed;
+  display: block;
 }
 </style>
