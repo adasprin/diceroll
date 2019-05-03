@@ -13,9 +13,7 @@ export default {
   },
   methods: {
     roll () {
-      this.$emit('rolled', {
-        string:  this.quant + 'd' + this.faces
-      })
+      this.$store.commit('addRecord', 'Бросок №');
     }
   }
 }
