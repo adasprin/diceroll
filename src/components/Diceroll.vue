@@ -5,9 +5,7 @@
     </div>
     <div id="Table">
       <log v-bind:result="newRecord"/>
-      <div id="Settings">
-        <button @click="resetdicebag">Сбросить настройки</button>
-      </div>
+      <settings/>
     </div>
   </div>
 </template>
@@ -15,6 +13,7 @@
 <script>
 import dice from '@/components/dice.vue';
 import log from '@/components/log.vue';
+import settings from '@/components/settings.vue';
 export default {
   name: 'diceroll',
   data: function () {
@@ -51,7 +50,7 @@ export default {
       this.newRecord = data.string+'_'+ tstamp;
     }
   },
-  components: {dice, log}
+  components: {dice, log, settings}
 }
 </script>
 
