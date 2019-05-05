@@ -13,11 +13,7 @@
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700');
-#App {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #ffffff;
-}
+
 #Nav {
   padding: 20px;
 }
@@ -25,9 +21,10 @@ html, body { height: 100%; padding: 0; margin: 0;}
 body { background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);}
 
 body, input, textarea, button, select {
-    font-family: 'Open Sans';
-    font-weight: 400;
-    font-size: 15px;
+  font-family: 'Open Sans';
+  font-weight: 400;
+  font-size: 15px;
+  color: #545454;
 }
 a { color: purple}
 footer { padding: 20px 0; text-align: center;}
