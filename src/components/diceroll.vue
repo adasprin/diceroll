@@ -5,8 +5,9 @@
     </div>
     <div id="Table">
       <log v-bind:result="newRecord"/>
-      <settings/>
+      <settings  v-if="showSettings" @hideSettings="showSettings=false"/>
     </div>
+    <button @click="showSettings=true" class="showSettings">НА СТРОЙКЕ</button>
   </div>
 </template>
 
@@ -24,7 +25,8 @@ export default {
       settings: {
         opacitybefore: false,
         sepaeach: 6
-      }
+      },
+      showSettings: false
     }
   },
   mounted() {
@@ -70,9 +72,16 @@ export default {
 }
 #Dicebag { flex: 1;}
 #Table { flex: 2;}
-#Settings {
-  background: rgba(1, 1, 1, .5);
-  position: fixed;
-  display: block;
+.showSettings {
+  background: #800080;
+  color: #141c26;
+  position: absolute;
+  bottom: -30px;
+  right: 0px;
+  border: none;
+  font-weight: bold;
+  border-radius: 1px;
+  padding: 2px 6px;
+  font-size: 12px;
 }
 </style>

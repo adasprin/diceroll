@@ -23,6 +23,7 @@ export default {
     },
     entropy: function (index) {
       this.$store.commit('entropyRecord', index);
+      this.counter ++;
     }
   },
   watch: {},

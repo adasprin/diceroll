@@ -7,11 +7,18 @@ export const store = new Vuex.Store({
   state: {
     settings: {},
     dicebag: {},
-    log: []
+    log: [],
+    sepaeach: 6,
+    counter: 0
   },
   mutations: {
     addRecord (state, record) {
+      if (state.counter==state.sepaeach) {
+        state.log.unshift('----' + (state.log.length + 1));
+        state.counter = 0;
+      }
       state.log.unshift(record + (state.log.length + 1));
+      state.counter++;
     },
     entropyRecord (state, index) {
       //record = 'enfjnu374g';
@@ -20,7 +27,14 @@ export const store = new Vuex.Store({
       //console.log(state.log);
     },
     clearLog (state) {
-      state.log.splice(0, state.log.length)
+      state.log.splice(0, state.log.length);
+      state.counter = 0;
+    },
+    changeSepaeach (state, value){
+      //var newval = value.replace(/\D+/g,"");
+      //console.log(typeof(value));
+      state.sepaeach = value;
+      state.counter = 0;
     }
   }
 })
