@@ -6,7 +6,8 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     settings: {
-      nullmodif: false
+      nullmodif: false,
+      critical: true
     },
     dicebag: {},
     log: [],
