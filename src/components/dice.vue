@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     roll () {
-      function randomNumber (m,n) { m = parseInt(m); n = parseInt(n); return Math.floor( Math.random() * (n - m + 1) ) + m;};
+      function randomNumber (m,n) { m = parseInt(m); n = parseInt(n); return Math.floor( Math.random() * (n - m + 1) ) + m;}
       var quant = this.quant,
           faces = this.faces,
           modif = this.modif,
@@ -45,7 +45,6 @@ export default {
       /*equallog = equallog.slice(0, -3); // Отрезаем последний плюс с пробелами
       equallog = equallog.replace(/\+/gi, '<span>+</span>'); // Оборачиваем плюсик в спанку*/
       equal = equal + modif;
-      console.log(this.$store.state.settings.nullmodif);
       if (this.$store.state.settings.nullmodif) {
         // Ничего не делаем
       } else {

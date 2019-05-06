@@ -57,8 +57,8 @@ hr {
 .inp-blade {
   background: #333961;
   border: 0;
-  border-bottom: 2px solid #fff;
-  color: #fff;
+  border-bottom: 2px solid #e2e2e2;
+  color: #e2e2e2;
   width: 64px;
   font-size: 26px;
   padding: 0 8px;

@@ -5,10 +5,10 @@
     </div>
     <div id="Table">
       <log v-bind:result="newRecord"/>
-      <settings  v-if="showSettings" @hideSettings="showSettings=false"/>
+      <settings  v-if="opndSettings" @hideSettings="opndSettings=false"/>
     </div>
     <div id="Controls">
-      <button class="action" @click="showSettings=true">НА СТРОЙКЕ</button>
+      <button class="action" @click="showSettings()">НА СТРОЙКЕ</button>
       <button class="action" @click="resetdicebag()">РЕСЕТ</button>
       <button class="action" @click="clearLog()">Х</button>
       <button class="action">{{this.$store.state.log.length}}</button>
@@ -31,7 +31,7 @@ export default {
         opacitybefore: false,
         sepaeach: 6
       },
-      showSettings: false
+      opndSettings: false
     }
   },
   mounted() {
@@ -40,6 +40,7 @@ export default {
     } else {
       this.resetdicebag();
     }
+    console.log(this.$route.path);
   },
   watch: {
     dicebag(newDicebag) {
@@ -58,6 +59,11 @@ export default {
     },
     clearLog: function(){
       this.$store.commit('clearLog');
+    },
+    showSettings: function () {
+      this.opndSettings = true;
+      //history.pushState('', 'Title of page', '/settings');
+      this.$router.push('settings');
     }
   },
   components: {dice, log, settings}
