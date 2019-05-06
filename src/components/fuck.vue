@@ -1,21 +1,20 @@
 <template>
   <div class="checkbtn">
-    <input v-bind:id="uuido" type="checkbox" v-model="checked">
-    <label v-bind:for="uuido">{{checked ? 'ВКЛ' : 'ВЫКЛ'}}</label>
+    <input v-bind:id="uuid" checked type="checkbox" v-model="checked">
+    <label v-bind:for="uuid">{{checked ? 'ВКЛ' : 'ВЫКЛ'}}</label>
   </div>
 </template>
 
 <script>
-let uuid = 0;
 export default {
-  name: 'checkbtn',
+  name: 'fuck',
   data: function () {
     return {
-      checked: true
+      checked: true,uuid
     }
   },
   beforeCreate() {
-    this.uuido = 'checkbox-' + uuid.toString();
+    this.uuid = uuid.toString();
     uuid += 1;
   }
 }
@@ -25,14 +24,14 @@ export default {
   display: inline-block;
 }
 .checkbtn label {
-  border: 1px solid #696969;
+  border: 1px solid #e2e2e2;
   padding: 4px;
   display: inline-block;
   width: 50px;
   text-align: center;
-  color: #696969;
+  color: gray;
 }
 
-.checkbtn input:checked + label { color: #e2e2e2; border-color: #e2e2e2; }
+.checkbtn input:checked + label { color: #fff; }
 .checkbtn input { display: none;}
 </style>

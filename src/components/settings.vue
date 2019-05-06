@@ -12,6 +12,7 @@
         <hr>
         <div class="modal-content-title">Критическое попадание и провал</div>
         <checkbtn/>
+        <checkbtn/>
         <div class="modal-anno">
           В логе будут отмечаться 1d20 броски в которых выпали 20-ка или 1-ка.
         </div>
@@ -50,7 +51,7 @@
   bottom: 0;
   background: rgba(0,0,0,.5);
   align-items: center;
-  color: #fff;
+  color: #e2e2e2;
   transition: opacity .3s ease;
 }
 .modal-view {

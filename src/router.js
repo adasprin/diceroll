@@ -12,11 +12,6 @@ export default new Router({
       component: home
     },
     {
-      path: '/settings',
-      name: 'settings',
-      component: home
-    },
-    {
       path: '/feedback',
       name: 'feedback',
       // route level code-splitting

@@ -41,6 +41,7 @@ export default {
       this.resetdicebag();
     }
     console.log(this.$route.path);
+
   },
   watch: {
     dicebag(newDicebag) {
@@ -62,8 +63,6 @@ export default {
     },
     showSettings: function () {
       this.opndSettings = true;
-      //history.pushState('', 'Title of page', '/settings');
-      this.$router.push('settings');
     }
   },
   components: {dice, log, settings}
