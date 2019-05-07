@@ -5,7 +5,7 @@
         <div v-if="!record.issepa">
           <div class="log-rec" v-bind:style="{'border-left-color': record.color}">
             <div class="log-rec-equal" v-bind:style="{'color': record.color}">{{record.equal}}</div>
-            <div class="log-rec-xdym">{{record.xdy}} _nomod</div>
+            <div class="log-rec-xdym">{{record.xdy}} {{record.modif}}</div>
             <div v-if="record.equallog.length > 1" class="log-rec-equallog">
               <span v-bind:key="index" v-for="(roll, index) in record.equallog">{{roll}}<span class="log-rec-equallog-plus" v-if="index+1 != record.equallog.length"> + </span></span>
             </div>
