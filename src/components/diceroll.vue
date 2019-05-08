@@ -1,17 +1,17 @@
 <template>
   <div id="Diceroll">
     <div id="Dicebag">
-      <dice @rolled='sendRecord' v-bind:quant="dice.quant" v-bind:faces="dice.faces" v-bind:key="index" v-for="(dice, index) in dicebag"/>
+      <dice @rolled='sendRecord' v-bind:quant="dice.quant" v-bind:faces="dice.faces" v-bind:modif="dice.modif" v-bind:key="index" v-for="(dice, index) in dicebag"/>
     </div>
     <div id="Table">
       <log v-bind:result="newRecord"/>
       <settings  v-if="opndSettings" @hideSettings="opndSettings=false"/>
     </div>
     <div id="Controls">
-      <button class="action" @click="showSettings()">НА СТРОЙКЕ</button>
-      <button class="action" @click="resetdicebag()">РЕСЕТ</button>
-      <button class="action" @click="clearLog()">Х</button>
-      <button class="action">{{this.$store.state.log.length}}</button>
+      <button class="controls-action" @click="showSettings()">НА СТРОЙКЕ</button>
+      <button class="controls-action" @click="resetdicebag()">РЕСЕТ</button>
+      <button class="controls-action">ВСЕГО БРОСКОВ: {{this.$store.state.log.length}}</button>
+      <button class="controls-action" @click="clearLog()">Х</button>
     </div>
   </div>
 </template>
@@ -24,7 +24,7 @@ export default {
   name: 'diceroll',
   data: function () {
     return {
-      defaultDicebag: [{quant: 1, faces: 4 },{quant: 1, faces: 6},{quant: 1, faces: 8},{quant: 1, faces: 10},{quant: 1, faces: 12},{quant: 1, faces: 20},{quant: 9, faces: 20}],
+      defaultDicebag: [{quant: 1, faces: 4, modif: -5 },{quant: 1, faces: 6},{quant: 1, faces: 8},{quant: 1, faces: 10},{quant: 1, faces: 12},{quant: 1, faces: 20},{quant: 9, faces: 20}],
       dicebag: Array(),
       newRecord: String(),
       settings: {
@@ -89,7 +89,7 @@ export default {
   bottom: -30px;
   right: 0px;
 }
-#Controls .action {
+.controls-action {
   background: #800080;
   color: #141c26;
   border: none;

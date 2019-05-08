@@ -34,6 +34,7 @@ export default {
           modif = this.modif,
           color = this.color,
           equal = 0,
+          сrit = false,
           currand = '',
           equallog = [],
           xdy = quant + 'd' + faces;         
@@ -42,12 +43,16 @@ export default {
         equal = equal + currand;
         equallog.push(currand);
       }
-      /*equallog = equallog.slice(0, -3); // Отрезаем последний плюс с пробелами
-      equallog = equallog.replace(/\+/gi, '<span>+</span>'); // Оборачиваем плюсик в спанку*/
+      if (quant == 1 && faces == 20) {
+        if (equal == 20) {
+          console.log('CRIT HIT!');
+        } else if (equal == 1) {
+          console.log('CRIT FAIL!');
+        }
+        
+      }
       equal = equal + modif;
-      if (this.$store.state.settings.nullmodif) {
-        // Ничего не делаем
-      } else {
+      if (!this.$store.state.settings.nullmodif) {
         equal <= 0 ? equal = 1 : equal;
       }
       var options = {xdy, equal, color, modif, equallog};
