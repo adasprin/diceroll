@@ -1,7 +1,7 @@
 <template>
-  <label @change="onChange($event)" class="checkbox">
+  <label class="checkbox">
     <slot></slot>
-    <input v-bind:checked="checked" type="checkbox">
+    <input @change="onChange($event)" :checked="checked" type="checkbox">
     <span class="checkbox-mark"></span>
   </label>
 </template>
