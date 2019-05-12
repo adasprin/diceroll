@@ -4,11 +4,11 @@
       <dice @rolled='sendRecord' v-bind:quant="dice.quant" v-bind:faces="dice.faces" v-bind:modif="dice.modif" v-bind:key="index" v-for="(dice, index) in dicebag"/>
     </div>
     <div id="Table">
-      <log v-bind:result="newRecord"/>
-      <settings  v-if="opndSettings" @hideSettings="opndSettings=false"/>
+      <log/>
+      <settings v-if="opndSettings" @hideSettings="opndSettings=false"/>
     </div>
     <div id="Controls">
-      <button class="controls-action" @click="showSettings()">НА СТРОЙКЕ</button>
+      <button class="controls-action" @click="opndSettings=true">НАСТРОЙКИ</button>
       <button class="controls-action" @click="resetdicebag()">РЕСЕТ</button>
       <button class="controls-action">ВСЕГО БРОСКОВ: {{this.$store.state.log.length}}</button>
       <button class="controls-action" @click="clearLog()">Х</button>
@@ -24,9 +24,7 @@ export default {
   name: 'diceroll',
   data: function () {
     return {
-      defaultDicebag: [{quant: 1, faces: 4, modif: -5 },{quant: 1, faces: 6},{quant: 1, faces: 8},{quant: 1, faces: 10},{quant: 1, faces: 12},{quant: 1, faces: 20},{quant: 9, faces: 20}],
       dicebag: Array(),
-      newRecord: String(),
       settings: {
         opacitybefore: false,
         sepaeach: 6
@@ -40,8 +38,6 @@ export default {
     } else {
       this.resetdicebag();
     }
-    console.log(this.$route.path);
-
   },
   watch: {
     dicebag(newDicebag) {
@@ -51,7 +47,7 @@ export default {
   methods: {
     // Устанавливаем дефолтные кубы
     resetdicebag: function(){
-      localStorage.dicebag = JSON.stringify(this.defaultDicebag);
+      localStorage.dicebag = JSON.stringify(this.$store.state.defaultDicebag);
       this.dicebag = JSON.parse(localStorage.dicebag);
     },
     sendRecord (data) {
@@ -60,9 +56,6 @@ export default {
     },
     clearLog: function(){
       this.$store.commit('clearLog');
-    },
-    showSettings: function () {
-      this.opndSettings = true;
     }
   },
   components: {dice, log, settings}
@@ -73,7 +66,6 @@ export default {
 <style>
 #Diceroll {
   margin: 0 auto;
-  min-height: 500px;
   padding: 20px;
   display: flex;
   position: relative;
@@ -98,5 +90,12 @@ export default {
   padding: 2px 6px;
   font-size: 12px;
   margin-left: 4px;
+  border: 1px dotted #800080;
+}
+.controls-action:hover {
+  background: #9a2f9a;
+}
+.controls-action:focus {
+  border: 1px dotted #ca3cca;;
 }
 </style>

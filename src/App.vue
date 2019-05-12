@@ -29,6 +29,7 @@ body, input, textarea, button, select {
   font-weight: 400;
   font-size: 15px;
   color: #545454;
+  outline: none;
 }
 a { color: purple}
 footer { padding: 20px 0; text-align: center;}
@@ -39,25 +40,7 @@ hr {
   height: 1px;
   margin: 10px 0;
 }
-.btn {
-  padding: 0 12px;
-  text-align: center;
-  background-color: #e2e2e2;
-  color: #2c3154;
-  border: none;
-  border-radius: 2px;
-  line-height: 34px;
-  height: 34px;
-  text-decoration: none;
-  cursor: pointer;
-  text-transform: uppercase;
-  z-index: 1;
-  position: relative;
-  letter-spacing: 1px;
-  box-sizing: border-box;
-  display: inline-block;
-  vertical-align: middle;
-}
+
 .inp-blade {
   background: #333961;
   border: 0;

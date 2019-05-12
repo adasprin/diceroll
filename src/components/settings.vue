@@ -1,90 +1,57 @@
 <template>
-  <transition name="modal">
-  <div id="Settings" class="modal">
-    <div class="modal-view">
-      <div class="modal-title">На стройке</div>
-      <div class="modal-content">
-        <button class="btn">Сбросить настройки</button>
-        <div class="modal-anno">Все комбинации кубиков и настройки вернутся в исходное состояние. Страница будет перезагружена.</div>
-        <div class="modal-content-title">Разделитель</div>
-        <input class="inp-blade" v-model="sepaeach" type="text">
-        <div class="modal-anno">Разделитель будет размещен после указанного количества бросков. Укажтите 0 чтобы убрать разделитель.</div>
-        <hr>
-        <div class="modal-content-title">Критическое попадание и провал</div>
-        <checkbtn/>
-        <checkbtn/>
-        <div class="modal-anno">
-          В логе будут отмечаться 1d20 броски в которых выпали 20-ка или 1-ка.
-        </div>
-        <hr>
-        <button class="btn" @click="$emit('hideSettings')">ГОТОВО</button>
-      </div>
+  <modal title="Настройки" @hideModal="hideSettings">    
+    <div class="modal-content-title">Разделитель</div>
+    <input class="inp-blade" v-model="sepaeach" type="text">
+    <div class="modal-content-anno">Разделитель будет размещен после указанного количества бросков. Укажтите 0 чтобы убрать разделитель.</div>
+    <hr>
+    <div class="modal-content-title">
+      <checkbox @change="changeSetting($event, 'critical')" :checked="this.$store.state.settings.critical">
+        Критическое попадание и провал
+      </checkbox>
     </div>
-  </div>
-  </transition>
+    <div class="modal-content-anno">
+      В логе будут отмечаться 1d20 броски в которых выпали 20-ка или 1-ка.
+    </div>
+    <div class="modal-content-title"><checkbox @change="changeSetting($event, 'negativeresult')" :checked="this.$store.state.settings.negativeresult">Отрицательный результат</checkbox></div>
+    <div class="modal-content-anno">
+      Минимальный результат броска кубиков не ограничивается еденицей. Такой результат может получиться при бороске с модификатором.
+    </div>
+    <hr>
+    <button class="modal-btn">Сбросить настройки</button>
+    <div class="modal-content-anno">Все комбинации кубиков и настройки вернутся в исходное состояние. Страница будет перезагружена.</div>
+    <hr>
+    <div class="modal-content-anno">
+      Настройки сохраняются автоматически.
+    </div>
+  </modal>
 </template>
 <script>
   import checkbtn from '@/components/checkbtn.vue';
+  import modal from '@/components/modal.vue';
+  import checkbox from '@/components/checkbox.vue';
   export default {
     name: 'settings',
     computed: {
       sepaeach: {
         get () {
-          return this.$store.state.sepaeach;
+          return this.$store.state.settings.sepaeach;
         },
         set (value) {        
           this.$store.commit('changeSepaeach', value);
         }
       }
     },
-    components: {checkbtn}
+    methods: {
+      hideSettings: function () {
+        this.$emit('hideSettings');
+      },
+      changeSetting: function (data, setting) {
+        var options = {setting, data};
+        this.$store.commit('changeSetting', options);
+      }
+    },
+    components: {checkbtn, modal, checkbox}
   }
 </script>
 <style>
-/* потом из этого сделать модальное окно */
-.modal {
-  display: flex;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,.5);
-  align-items: center;
-  color: #e2e2e2;
-  transition: opacity .3s ease;
-}
-.modal-view {
-  width: 300px;
-  margin: 0 auto;
-  background: #2C3154;
-  padding: 20px;
-  border-radius: 2px;
-  transition: all .3s ease;
-}
-.modal-title {
-  font-size: 26px;
-  font-weight: 200;
-  line-height: 28px;
-  margin-bottom: 30px;
-}
-.modal-content-title {
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  display: block;
-}
-.modal-anno {
-  font-size: 12px;
-  font-weight: 200;
-  margin: 10px 0 16px;
-}
-
-/* Анимация */
-.modal-enter { opacity: 0;}
-.modal-leave-active { opacity: 0;}
-.modal-enter .modal-view ,
-.modal-leave-active .modal-view {
-  transform: scale(1.1);
-}
-/*/ Анимация */
 </style>

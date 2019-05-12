@@ -43,11 +43,6 @@ export default {
 </script>
 <style>
 @import url('https://fonts.googleapis.com/css?family=Comfortaa');
-#Log {
-  border-radius: 2px;
-  padding: 10px;
-  overflow: auto;
-}
 .log-list {
   overflow-y: auto;
   height: inherit;
