@@ -10,7 +10,7 @@
     <div id="Controls">
       <button class="controls-action" @click="opndSettings=true">НАСТРОЙКИ</button>
       <button class="controls-action" @click="resetdicebag()">РЕСЕТ</button>
-      <button class="controls-action">ВСЕГО БРОСКОВ: {{this.$store.state.log.length}}</button>
+      <button class="controls-action">INFO: {{this.$store.state.log.length}}</button>
       <button class="controls-action" @click="clearLog()">Х</button>
     </div>
   </div>

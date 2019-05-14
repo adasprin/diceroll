@@ -34,7 +34,7 @@ export default {
           modif = this.modif,
           color = this.color,
           equal = 0,
-          сrit = false,
+          crit = false,
           currand = '',
           equallog = [],
           xdy = quant + 'd' + faces;         
@@ -45,9 +45,9 @@ export default {
       }
       if (quant == 1 && faces == 20) {
         if (equal == 20) {
-          console.log('CRIT HIT!');
+          crit = 'CRIT_HIT';
         } else if (equal == 1) {
-          console.log('CRIT FAIL!');
+          crit = 'CRIT_FAIL';
         }
         
       }
@@ -55,11 +55,39 @@ export default {
       if (!this.$store.state.settings.nullmodif) {
         equal <= 0 ? equal = 1 : equal;
       }
-      var options = {xdy, equal, color, modif, equallog};
+      var options = {xdy, equal, color, modif, equallog, crit};
       this.$store.commit('addRecord', options);
     }
   }
 }
 </script>
 <style>
+  .dice {
+    display: inline-block;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 20px;
+    margin: 0 20px 20px 0;
+    width: 90px;
+    font-family: arial,sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    outline: none;
+    border: 1px solid #dbdbdb;
+    border-radius: 2px;
+    background: rgb(245,245,245) linear-gradient(#f4f4f4, #f1f1f1);
+    position: relative;
+  }
+  .dice::before {
+    content: '';
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    border-radius: 100%;
+    background-color: #800080;
+    border: 3px solid #dbdbdb;
+
+    top: -5px;
+    left: -5px;
+  }
 </style>
