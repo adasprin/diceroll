@@ -1,5 +1,8 @@
 <template>
-  <button class="dice" @click='roll'>{{quant}}d{{faces}}</button>
+  
+  <button class="dice" @click='roll'>
+    <span class="dice-color"></span>
+    {{quant}}d{{faces}}</button>
 </template>
 
 <script>
@@ -78,16 +81,30 @@ export default {
     background: rgb(245,245,245) linear-gradient(#f4f4f4, #f1f1f1);
     position: relative;
   }
-  .dice::before {
-    content: '';
+  .dice:hover {
+    color: rgb(24,24,24);
+    border: 1px solid rgb(198,198,198);
+    background: #f7f7f7 linear-gradient(#f7f7f7, #f1f1f1);
+    box-shadow: 0 1px 2px rgba(0,0,0,.1);
+  }
+  .dice:focus {
+    border: 1px dotted #8a8a8a;
+  }
+  .dice:active {
+    color: rgb(51,51,51);
+    border: 1px solid rgb(204,204,204);
+    background: rgb(238,238,238) linear-gradient(rgb(238,238,238), rgb(224,224,224));
+    box-shadow: 0 1px 2px rgba(0,0,0,.1) inset;
+  }
+  .dice-color {
     position: absolute;
-    height: 10px;
-    width: 10px;
-    border-radius: 100%;
-    background-color: #800080;
-    border: 3px solid #dbdbdb;
-
-    top: -5px;
-    left: -5px;
+    width: 4px;
+    top: 3px;
+    left: 3px;
+    bottom: 3px;
+    border-radius: 4px;
+    box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25);
+    display: block;
+    background-color: #dadada;
   }
 </style>

@@ -66,7 +66,7 @@ export default {
 <style>
 #Diceroll {
   margin: 0 auto;
-  padding: 20px;
+  padding: 26px;
   display: flex;
   position: relative;
   background: #ececec;

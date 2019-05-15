@@ -1,9 +1,8 @@
 <template>
   <div id="App">
-    <div id="Nav">
-      <router-link to="/">Кубомёт</router-link> |
-      <router-link to="/feedback">Пожаловаться</router-link>
-    </div>
+    <header>
+      <img src="./assets/logo.png" id="Logo" alt="Кубомёт - Diceroll">
+    </header>
     <router-view/>
     <footer>
       <a href="http://rustycrow.ru" target="blank">Ржавая Ворона</a>
@@ -14,6 +13,11 @@
 export default {
   name: 'app'
 }
+/*
+    <div id="Nav">
+      <router-link to="/">Кубомёт</router-link> |
+      <router-link to="/feedback">Пожаловаться</router-link>
+    </div>*/
 </script>
 <style>
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700');
@@ -21,9 +25,10 @@ export default {
 #Nav {
   padding: 20px;
 }
-html, body { height: 100%; padding: 0; margin: 0;}
+html, body { padding: 0; margin: 0;}
 body { background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);}
-
+header {text-align: center; padding: 40px 0 20px;}
+#Logo { height: 160px;}
 body, input, textarea, button, select {
   font-family: 'Open Sans';
   font-weight: 400;
