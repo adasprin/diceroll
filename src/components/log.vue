@@ -14,7 +14,6 @@
         <hr v-else>
       </div>
     </div>
-    <div class="log-clear">очитистить лог</div>
   </div>
 
 </template>
@@ -45,6 +44,7 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css?family=Comfortaa');
 #Log {
+  width: 400px;
   position: relative;
 }
 .log-list {
@@ -74,14 +74,6 @@ export default {
 .log-rec-xdym { text-align: right;}
 .log-rec-equallog { width: 100%; font-size: 14px;}
 .log-rec-equallog .log-rec-equallog-plus { color: #b7b7b7;}
-
-.log-clear {
-  position: absolute;
-  background: #fff;
-  border: none;
-  bottom: 2px;
-  left: 15px;
-}
 /* СКРОЛЛ */
 .log-list::-webkit-scrollbar { width: 10px; height: 6px; }
 .log-list::-webkit-scrollbar-button { width: 0px; height: 0px;}

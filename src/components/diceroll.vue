@@ -1,19 +1,20 @@
 <template>
   <div id="Diceroll">
-    <div id="Dicebag">
-      <dice @rolled='sendRecord' 
-        :quant="dice.quant" 
-        :faces="dice.faces" 
-        :modif="dice.modif" 
-        :key="index"
-        :color="dice.color" v-for="(dice, index) in dicebag"/>
-    </div>
     <div id="Table">
+      <div id="Dicebag">
+        <dice @rolled='sendRecord' 
+          :quant="dice.quant" 
+          :faces="dice.faces" 
+          :modif="dice.modif" 
+          :key="index"
+          :color="dice.color" v-for="(dice, index) in dicebag"/>
+      </div>
       <log/>
-      <settings v-if="opndSettings" @hideSettings="opndSettings=false"/>
     </div>
     <div id="Controls">
+      <button class="controls-action" >+</button>
       <button class="controls-action" @click="opndSettings=true">НАСТРОЙКИ</button>
+      <settings v-if="opndSettings" @hideSettings="opndSettings=false"/>
       <button class="controls-action" @click="resetdicebag()">РЕСЕТ</button>
       <button class="controls-action">INFO: {{this.$store.state.log.length}}</button>
       <button class="controls-action" @click="clearLog()">Х</button>
@@ -71,20 +72,22 @@ export default {
 <style>
 #Diceroll {
   margin: 0 auto;
+  width: 686px;
+}
+#Table {
   padding: 26px;
   display: flex;
+  justify-content: space-between;
   position: relative;
   background: #ececec;
-  width: 700px;
   box-shadow: 0 2px 11px rgba(0, 0, 0, .3);
   border-radius: 2px;
 }
-#Dicebag { flex: 1;}
-#Table { flex: 2;}
+#Dicebag { width: 200px;}
 #Controls {
-  position: absolute;
-  bottom: -30px;
-  right: 0px;
+  display: flex;
+  padding-top: 4px;
+  justify-content: flex-end;
 }
 .controls-action {
   background: #800080;
@@ -95,7 +98,7 @@ export default {
   padding: 2px 6px;
   font-size: 12px;
   margin-left: 4px;
-  border: 1px dotted #800080;
+  border: 1px solid #800080;
 }
 .controls-action:hover {
   background: #9a2f9a;

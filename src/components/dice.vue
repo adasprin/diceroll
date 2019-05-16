@@ -80,6 +80,9 @@ export default {
     background: rgb(245,245,245) linear-gradient(#f4f4f4, #f1f1f1);
     position: relative;
   }
+  .dice:nth-child(2n) {
+    margin-right: 0;
+  }
   .dice:hover {
     color: rgb(24,24,24);
     border: 1px solid rgb(198,198,198);
