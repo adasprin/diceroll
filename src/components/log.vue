@@ -1,19 +1,20 @@
 <template>
   <div id="Log">
     <div class="log-list">
-      <div class="log-item" v-bind:key="index" v-for="(record, index) in records">
+      <div class="log-item" :key="index" v-for="(record, index) in records">
         <div v-if="!record.issepa">
-          <div class="log-rec" v-bind:style="{'border-left-color': record.color}">
-            <div class="log-rec-equal" v-bind:style="{'color': record.color}">{{record.equal}}</div>
+          <div class="log-rec" :style="{'border-left-color': record.color}">
+            <div class="log-rec-equal" :style="{'color': record.color}">{{record.equal}}</div>
             <div class="log-rec-xdym">{{record.xdy}}{{(record.modif != 0) ? record.modif : ''}}</div>
             <div v-if="record.equallog.length > 1" class="log-rec-equallog">
-              <span v-bind:key="index" v-for="(roll, index) in record.equallog">{{roll}}<span class="log-rec-equallog-plus" v-if="index+1 != record.equallog.length"> + </span></span>
+              <span :key="index" v-for="(roll, index) in record.equallog">{{roll}}<span class="log-rec-equallog-plus" v-if="index+1 != record.equallog.length"> + </span></span>
             </div>
           </div>
         </div>
         <hr v-else>
       </div>
     </div>
+    <div class="log-clear">очитистить лог</div>
   </div>
 
 </template>
@@ -43,6 +44,9 @@ export default {
 </script>
 <style>
 @import url('https://fonts.googleapis.com/css?family=Comfortaa');
+#Log {
+  position: relative;
+}
 .log-list {
   overflow-y: auto;
   height: inherit;
@@ -72,10 +76,11 @@ export default {
 .log-rec-equallog .log-rec-equallog-plus { color: #b7b7b7;}
 
 .log-clear {
-  width: 25px; height: 25px;
-  background: #800080;
+  position: absolute;
+  background: #fff;
   border: none;
-  color: #fff;
+  bottom: 2px;
+  left: 15px;
 }
 /* СКРОЛЛ */
 .log-list::-webkit-scrollbar { width: 10px; height: 6px; }

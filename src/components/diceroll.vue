@@ -1,7 +1,12 @@
 <template>
   <div id="Diceroll">
     <div id="Dicebag">
-      <dice @rolled='sendRecord' v-bind:quant="dice.quant" v-bind:faces="dice.faces" v-bind:modif="dice.modif" v-bind:key="index" v-for="(dice, index) in dicebag"/>
+      <dice @rolled='sendRecord' 
+        :quant="dice.quant" 
+        :faces="dice.faces" 
+        :modif="dice.modif" 
+        :key="index"
+        :color="dice.color" v-for="(dice, index) in dicebag"/>
     </div>
     <div id="Table">
       <log/>

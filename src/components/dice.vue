@@ -1,7 +1,6 @@
 <template>
-  
   <button class="dice" @click='roll'>
-    <span class="dice-color"></span>
+    <span class="dice-color" :style="{'background-color': color}"></span>
     {{quant}}d{{faces}}</button>
 </template>
 

@@ -50,7 +50,11 @@
         this.$store.commit('changeSetting', options);
       }
     },
-    components: {checkbtn, modal, checkbox}
+    components: {checkbtn, modal, checkbox},
+    beforeDestroy () {
+      //console.log('i`m dying');
+    }
+
   }
 </script>
 <style>

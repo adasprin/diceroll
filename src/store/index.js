@@ -10,7 +10,15 @@ export const store = new Vuex.Store({
       critical: true,
       sepaeach: 6
     },
-    defaultDicebag: [{quant: 1, faces: 4},{quant: 1, faces: 6},{quant: 1, faces: 8},{quant: 1, faces: 10},{quant: 1, faces: 12},{quant: 1, faces: 20},{quant: 3, faces: 4, modif: -5}],
+    defaultDicebag: [
+      {quant: 1, faces: 4},
+      {quant: 1, faces: 6, color: '#cddc39'},
+      {quant: 1, faces: 8},
+      {quant: 1, faces: 10},
+      {quant: 1, faces: 12},
+      {quant: 1, faces: 20},
+      {quant: 1, faces: 100},
+      {quant: 3, faces: 4, modif: -5}],
     dicebag: {},
     log: [],
     counter: 0
