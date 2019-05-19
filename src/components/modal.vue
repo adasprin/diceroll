@@ -1,6 +1,6 @@
 <template>
   <transition name="modal">
-    <div @click="hidewithFog($event)" class="modal">
+    <div @click="hidewithFog($event)" :class="['modal', theme ? 'modal-theme-'+theme : '']">
       <div class="modal-view">
         <div v-if="showTitle" class="modal-title">{{title}}</div>
         <div class="modal-content">
@@ -23,9 +23,18 @@ export default {
     showTitle: {
       default: true
     },
-    showActions: {
+    'showActions': {
       default: true
+    },
+    theme: {
+      default: ''
     }
+  },
+  mounted: function () {
+    document.body.style.overflow = 'hidden';
+  },
+  destroyed: function () {
+    document.body.style.overflow = '';
   },
   methods: {
     hidewithFog: function (e) { // Закрываем при клике за пределами контента
@@ -53,6 +62,10 @@ export default {
   color: #e2e2e2;
   transition: opacity .3s ease;
   z-index: 900;
+  overflow: scroll;
+}
+.modal-theme-dim .modal-view{
+  background: #171717;
 }
 .modal-view {
   width: 350px;
@@ -62,6 +75,7 @@ export default {
   border-radius: 2px;
   transition: all .3s ease;
 }
+
 .modal-title {
   font-size: 26px;
   font-weight: 200;
@@ -98,11 +112,40 @@ export default {
   display: inline-block;
   vertical-align: middle;
 }
+.modal-inp {
+  background: #333961;
+  border: 0;
+  border-bottom: 2px solid #e2e2e2;
+  color: #e2e2e2;
+  width: 64px;
+  font-size: 26px;
+  padding: 0 8px;
+}
+.modal-btn:hover {
+  background-color: #fff;
+}
+.modal-btn:focus  {
+  text-decoration:  underline;
+}
 .modal hr {
     background: #43486B;
     border: none;
     height: 1px;
-    margin: 10px 0;
+    margin: 16px 0;
+}
+
+/* THEME DIM */
+.modal-theme-dim { background-color: #34505880;}
+.modal-theme-dim .modal-view{ background: #171717;}
+.modal-theme-dim hr { background: #2f2f2f;}
+.modal-theme-dim .modal-inp { background: #212121;}
+/*/ THEME DIM */
+
+@media screen and (max-height: 768px) {
+  .modal {
+    align-items: flex-start;
+    border-radius: 0;
+  }
 }
 /* Анимация */
 .modal-enter { opacity: 0;}

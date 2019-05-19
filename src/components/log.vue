@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: 'log',
+name: 'log',
   props: {
     result: String()
   },
@@ -55,6 +55,8 @@ export default {
   border-radius: 2px;
   box-shadow: 0 1px 2px rgba(0,0,0,.1);
   height: 450px;
+  background: #fff url(../assets/log_bg_1.png) center no-repeat;
+    background-size: 250px;
 }
 .log-rec {
   border-left-width: 4px;

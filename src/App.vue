@@ -45,14 +45,11 @@ hr {
   height: 1px;
   margin: 10px 0;
 }
-
-.inp-blade {
-  background: #333961;
-  border: 0;
-  border-bottom: 2px solid #e2e2e2;
-  color: #e2e2e2;
-  width: 64px;
-  font-size: 26px;
-  padding: 0 8px;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type='number'] {
+    -moz-appearance: textfield;
 }
 </style>

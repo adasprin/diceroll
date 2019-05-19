@@ -13,6 +13,7 @@
     </div>
     <div id="Controls">
       <button class="controls-action" >+</button>
+      <dicecreator/>
       <button class="controls-action" @click="opndSettings=true">НАСТРОЙКИ</button>
       <settings v-if="opndSettings" @hideSettings="opndSettings=false"/>
       <button class="controls-action" @click="resetdicebag()">РЕСЕТ</button>
@@ -26,6 +27,7 @@
 import dice from '@/components/dice.vue';
 import log from '@/components/log.vue';
 import settings from '@/components/settings.vue';
+import dicecreator from '@/components/dicecreator.vue';
 export default {
   name: 'diceroll',
   data: function () {
@@ -64,7 +66,7 @@ export default {
       this.$store.commit('clearLog');
     }
   },
-  components: {dice, log, settings}
+  components: {dice, log, settings, dicecreator}
 }
 </script>
 

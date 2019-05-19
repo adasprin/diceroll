@@ -1,7 +1,7 @@
 <template>
   <modal title="Настройки" @hideModal="hideSettings">    
     <div class="modal-content-title">Разделитель</div>
-    <input class="inp-blade" v-model="sepaeach" type="text">
+    <input class="modal-inp" v-model="sepaeach" type="text">
     <div class="modal-content-anno">Разделитель будет размещен после указанного количества бросков. Укажтите 0 чтобы убрать разделитель.</div>
     <hr>
     <div class="modal-content-title">
@@ -26,7 +26,6 @@
   </modal>
 </template>
 <script>
-  import checkbtn from '@/components/checkbtn.vue';
   import modal from '@/components/modal.vue';
   import checkbox from '@/components/checkbox.vue';
   export default {
@@ -50,7 +49,7 @@
         this.$store.commit('changeSetting', options);
       }
     },
-    components: {checkbtn, modal, checkbox},
+    components: {modal, checkbox},
     beforeDestroy () {
       //console.log('i`m dying');
     }
