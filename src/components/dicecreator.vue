@@ -37,7 +37,7 @@ export default {
         quant: null,
         faces: null,
         modif: null,
-        color: null,
+        color: '',
       },
       colors: {
         'red': '#f44336',
@@ -60,7 +60,7 @@ export default {
         'bgrey': '#607d8b',
         'dgrey': '#212121'
       },
-      
+      errors: []
     }     
   },
   methods: {
@@ -73,7 +73,20 @@ export default {
       this.selected.color = selectedColor;
     },
     createDice: function () {
-      console.log('111');
+      var quant = Number(this.selected.quant),
+          faces = Number(this.selected.faces),
+          modif = this.selected.modif,
+          color = this.colors[this.selected.color],
+          noErrors = true;
+      this.errors = [];
+      //console.log (quant, faces, modif, color);
+      var morethenZero = function (data) {};
+      var isNumber = function (data) {data.isInteger()};
+      /* Проверяем цвет */
+      if (!color) {
+        this.errors.push('Выберите цвет');
+      }
+      /*/ Проверяем цвет */
     }
   }
 }
