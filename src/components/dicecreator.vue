@@ -1,5 +1,5 @@
 <template>
-  <modal  theme="dim" v-if="true" title="Создать комбинацию" :showActions="false">
+  <modal  theme="dim" v-if="false" title="Создать комбинацию" :showActions="false">
     <label for="Quant-dicecreator" class="modal-content-title">Количество кубиков</label>
     <input id="Quant-dicecreator" v-model.number="selected.quant" max="4" type="number" placeholder="0" name="quant" class="modal-inp">
     <hr>
@@ -22,6 +22,10 @@
         v-for="(color, index) in colors"></button>
     </div>
     <hr>
+    <div class="modal-content-title">
+      Отладка
+    </div>
+    <div v-for="(error, index) in errors" :key="index">- {{error}}</div>
     <button @click="createDice()" class="modal-btn dicecreator-save">Создать</button>
     <button class="modal-btn">Отмена</button>
   </modal>
@@ -79,14 +83,21 @@ export default {
           color = this.colors[this.selected.color],
           noErrors = true;
       this.errors = [];
-      //console.log (quant, faces, modif, color);
-      var morethenZero = function (data) {};
-      var isNumber = function (data) {data.isInteger()};
-      /* Проверяем цвет */
+
+      if ( quant <= 0 || !Number.isInteger(quant)) {
+        this.errors.push('Укажите положительное и целое число кубиков');
+      }
+      if ( faces <= 0 || !Number.isInteger(faces)) {
+        this.errors.push('Укажите целое и положительное число граней');
+      }
+      if (!Number.isInteger(modif)) { // || modif != null || modif != ''
+        if (modif != null && modif != '') {
+          this.errors.push('Коряый модификатор');
+        }
+      }
       if (!color) {
         this.errors.push('Выберите цвет');
       }
-      /*/ Проверяем цвет */
     }
   }
 }

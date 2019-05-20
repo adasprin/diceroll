@@ -18,7 +18,7 @@ export const store = new Vuex.Store({
       {quant: 1, faces: 12},
       {quant: 1, faces: 20},
       {quant: 1, faces: 100},
-      {quant: 3, faces: 4, modif: -5}],
+      {quant: 1, faces: 4, modif: -5}],
     dicebag: {},
     log: [],
     counter: 0
