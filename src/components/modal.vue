@@ -1,3 +1,6 @@
+<!-- 
+@hideModal - Событие закрытия модального окна
+-->
 <template>
   <transition name="modal">
     <div @click="hidewithFog($event)" :class="['modal', theme ? 'modal-theme-'+theme : '']">
@@ -62,7 +65,7 @@ export default {
   color: #e2e2e2;
   transition: opacity .3s ease;
   z-index: 900;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 .modal-theme-dim .modal-view{
   background: #171717;

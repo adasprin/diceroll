@@ -12,10 +12,12 @@
       <log/>
     </div>
     <div id="Controls">
-      <button class="controls-action" >+</button>
-      <dicecreator/>
+      <button class="controls-action" @click="opndDicecreator=true">+</button>
+      <dicecreator v-if="opndDicecreator" @closeDicecreator="opndDicecreator=false"/>
+
       <button class="controls-action" @click="opndSettings=true">НАСТРОЙКИ</button>
       <settings v-if="opndSettings" @hideSettings="opndSettings=false"/>
+
       <button class="controls-action" @click="resetdicebag()">РЕСЕТ</button>
       <button class="controls-action">INFO: {{this.$store.state.log.length}}</button>
       <button class="controls-action" @click="clearLog()">Х</button>
@@ -37,7 +39,8 @@ export default {
         opacitybefore: false,
         sepaeach: 6
       },
-      opndSettings: false
+      opndSettings: false,
+      opndDicecreator: false
     }
   },
   mounted() {

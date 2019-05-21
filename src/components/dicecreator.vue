@@ -1,5 +1,5 @@
 <template>
-  <modal  theme="dim" v-if="false" title="Создать комбинацию" :showActions="false">
+  <modal  theme="dim" title="Создать комбинацию" :showActions="false">
     <label for="Quant-dicecreator" class="modal-content-title">Количество кубиков</label>
     <input id="Quant-dicecreator" v-model.number="selected.quant" max="4" type="number" placeholder="0" name="quant" class="modal-inp">
     <hr>
@@ -13,11 +13,11 @@
     </div>
     <hr>
     <div class="modal-content-title">Выберите цвет</div>
-    <div class="dicecreator-colorpocker">
+    <div class="sclrpcker">
       <button
         @click="selectColor(index)"
         :style="{'background-color': color}"
-        :class="[ index == selected.color ? 'dicecreator-clrpcker-selected' : '', 'dicecreator-clrpcker']"
+        :class="[ index == selected.color ? 'clrpcker-color-selected' : '', 'clrpcker-color']"
         :key="index"
         v-for="(color, index) in colors"></button>
     </div>
@@ -27,7 +27,7 @@
     </div>
     <div v-for="(error, index) in errors" :key="index">- {{error}}</div>
     <button @click="createDice()" class="modal-btn dicecreator-save">Создать</button>
-    <button class="modal-btn">Отмена</button>
+    <button class="modal-btn" @click="closeDicecreator()">Отмена</button>
   </modal>
 </template>
 <script>
@@ -68,6 +68,9 @@ export default {
     }     
   },
   methods: {
+    closeDicecreator: function (){
+      this.$emit('closeDicecreator');
+    },
     clearNumber: function () {
       //this[model] = Number(this[model].replace(/[^-0-9+]/gim,''));
       //var str='saafsdfsd+2e3432-sdgfdsg';
@@ -81,11 +84,19 @@ export default {
           faces = Number(this.selected.faces),
           modif = this.selected.modif,
           color = this.colors[this.selected.color],
+          output = {
+            quant: null,
+            faces: null,
+            modif: null,
+            color: null
+          },
           noErrors = true;
       this.errors = [];
 
       if ( quant <= 0 || !Number.isInteger(quant)) {
         this.errors.push('Укажите положительное и целое число кубиков');
+      } else {
+        output.quant = quant;
       }
       if ( faces <= 0 || !Number.isInteger(faces)) {
         this.errors.push('Укажите целое и положительное число граней');
@@ -97,14 +108,17 @@ export default {
       }
       if (!color) {
         this.errors.push('Выберите цвет');
+      } else {
+        output.color = color;
       }
+      console.log(output);
     }
   }
 }
 </script>
 <style>
 .dicecreator-save { margin-right: 10px;}
-.dicecreator-clrpcker {
+.clrpcker-color {
   width: 70px;
   height: 50px;
   border: 4px solid #171717;
@@ -112,5 +126,6 @@ export default {
   text-align: center;
   cursor: pointer;
 }
-.dicecreator-clrpcker-selected { border: 4px solid #e2e2e2;}
+.clrpcker-color:focus { border: 4px solid #313131;}
+.clrpcker-color.clrpcker-color-selected { border: 4px solid #e2e2e2;}
 </style>
