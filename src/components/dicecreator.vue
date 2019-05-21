@@ -1,30 +1,40 @@
 <template>
   <modal  theme="dim" title="Создать комбинацию" :showActions="false">
-    <label for="Quant-dicecreator" class="modal-content-title">Количество кубиков</label>
-    <input id="Quant-dicecreator" v-model.number="selected.quant" max="4" type="number" placeholder="0" name="quant" class="modal-inp">
-    <hr>
-    <label for="Faces-dicecreator" class="modal-content-title">Количество граней на кубике</label>
-    <input id="Faces-dicecreator" v-model.number="selected.faces" type="number" placeholder="0" name="faces" class="modal-inp">
-    <hr>
-    <label for="Modif-dicecreator" class="modal-content-title">Модификатор</label>
-    <input id="Modif-dicecreator" v-model.number="selected.modif" type="number" placeholder="0" name="faces" class="modal-inp">
-    <div class="modal-content-anno">
-      Укажите число, например 5 или -3, модификатор будет добавлен к результату броска.
+    <div>
+      <label for="Quant-dicecreator" class="modal-content-title">Количество кубиков</label>
+      <input id="Quant-dicecreator" v-model.number="selected.quant.value" max="4" type="number" placeholder="0" name="quant" class="modal-inp">
+      <div v-if="selected.quant.error" class="modal-content-anno">
+        {{selected.quant.message}}
+      </div>
     </div>
     <hr>
-    <div class="modal-content-title">Выберите цвет</div>
+    <div>
+      <label for="Faces-dicecreator" class="modal-content-title">Количество граней на кубике</label>
+      <input id="Faces-dicecreator" v-model.number="selected.faces.value" type="number" placeholder="0" name="faces" class="modal-inp">
+      <div v-if="selected.faces.error" class="modal-content-anno">
+        {{selected.faces.message}}
+      </div>
+    </div>
+    <hr>
+    <label for="Modif-dicecreator" class="modal-content-title">Модификатор</label>
+    <input id="Modif-dicecreator" v-model.number="selected.modif.value" type="number" placeholder="0" name="faces" class="modal-inp">
+    <div class="modal-content-anno">
+      {{selected.modif.message}}
+    </div>
+    <hr>
+    <div class="modal-content-title">Цвет</div>
     <div class="sclrpcker">
       <button
         @click="selectColor(index)"
         :style="{'background-color': color}"
-        :class="[ index == selected.color ? 'clrpcker-color-selected' : '', 'clrpcker-color']"
+        :class="[ index == selected.color.value ? 'clrpcker-color-selected' : '', 'clrpcker-color']"
         :key="index"
         v-for="(color, index) in colors"></button>
     </div>
-    <hr>
-    <div class="modal-content-title">
-      Отладка
+    <div v-if="selected.color.error" class="modal-content-anno">
+      {{selected.color.message}}
     </div>
+    <hr>
     <div v-for="(error, index) in errors" :key="index">- {{error}}</div>
     <button @click="createDice()" class="modal-btn dicecreator-save">Создать</button>
     <button class="modal-btn" @click="closeDicecreator()">Отмена</button>
@@ -38,10 +48,26 @@ export default {
   data: function () {
     return {
       selected: {
-        quant: null,
-        faces: null,
-        modif: null,
-        color: '',
+        quant: {
+          value: null,
+          message: 'Укажите положительное целое число кубиков',
+          error: false
+        },
+        faces: {
+          value: null,
+          message: 'Укажите целое положительное число граней',
+          error: false
+        },
+        modif: {
+          value: null,
+          message: '',
+          error: false
+        },
+        color: {
+          value: null,
+          message: 'Выберите цвет',
+          error: false
+        }
       },
       colors: {
         'red': '#f44336',
@@ -77,13 +103,13 @@ export default {
       //alert();.replace(/[^-0-9+]/gim,'')
     },
     selectColor: function (selectedColor) {
-      this.selected.color = selectedColor;
+      this.selected.color.value = selectedColor;
     },
     createDice: function () {
-      var quant = Number(this.selected.quant),
-          faces = Number(this.selected.faces),
-          modif = this.selected.modif,
-          color = this.colors[this.selected.color],
+      var quant = Number(this.selected.quant.value),
+          faces = Number(this.selected.faces.value),
+          modif = this.selected.modif.value,
+          color = this.colors[this.selected.color.value],
           output = {
             quant: null,
             faces: null,
@@ -93,13 +119,16 @@ export default {
           noErrors = true;
       this.errors = [];
 
-      if ( quant <= 0 || !Number.isInteger(quant)) {
-        this.errors.push('Укажите положительное и целое число кубиков');
+      if ( quant <= 0 || !Number.isInteger(quant) || quant > 1000) {
+        this.selected.quant.error = true;
       } else {
+        this.selected.quant.error = false;
         output.quant = quant;
       }
       if ( faces <= 0 || !Number.isInteger(faces)) {
-        this.errors.push('Укажите целое и положительное число граней');
+        this.selected.faces.error = true;
+      } else {
+        output.faces = faces;
       }
       if (!Number.isInteger(modif)) { // || modif != null || modif != ''
         if (modif != null && modif != '') {
@@ -107,7 +136,7 @@ export default {
         }
       }
       if (!color) {
-        this.errors.push('Выберите цвет');
+        this.selected.color.error = true;
       } else {
         output.color = color;
       }
