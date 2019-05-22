@@ -2,7 +2,7 @@
   <modal  theme="dim" title="Создать комбинацию" :showActions="false">
     <div>
       <label for="Quant-dicecreator" class="modal-content-title">Количество кубиков</label>
-      <input id="Quant-dicecreator" v-model.number="selected.quant.value" max="4" type="number" placeholder="0" name="quant"
+      <input id="Quant-dicecreator" v-model.number="selected.quant.value" type="number" placeholder="0" name="quant"
         :class="['modal-inp', selected.quant.error ? 'modal-inp-error' : '']">
       <div v-if="selected.quant.error" class="modal-content-anno modal-content-error">
         {{selected.quant.message}}
@@ -20,8 +20,9 @@
     <hr>
     <div>
       <label for="Modif-dicecreator" class="modal-content-title">Модификатор</label>
-      <input id="Modif-dicecreator" v-model.number="selected.modif.value" type="number" placeholder="0" name="faces" class="modal-inp">
-      <div class="modal-content-anno">
+      <input id="Modif-dicecreator" v-model.number="selected.modif.value" type="number" placeholder="0" name="faces" 
+        :class="['modal-inp', selected.modif.error ? 'modal-inp-error' : '']">
+      <div class="modal-content-anno" :class="['modal-content-anno', selected['modif'].error ? 'modal-content-error' : '']">
         {{selected.modif.message}}
       </div>
     </div>
@@ -64,7 +65,7 @@ export default {
         },
         modif: {
           value: null,
-          message: 'Укажите положительное или отрицательное целое число не больше 1000 или оставьте поле пустым, если модификатор не требуется.',
+          message: 'Укажите положительное или отрицательное целое число не больше 1000, или укажите 0 если модификатор не требуется.',
           error: false
         },
         color: {
@@ -93,8 +94,7 @@ export default {
         'grey': '#9e9e9e',
         'bgrey': '#607d8b',
         'dgrey': '#212121'
-      },
-      errors: []
+      }
     }     
   },
   methods: {
@@ -108,6 +108,9 @@ export default {
     },
     selectColor: function (selectedColor) {
       this.selected.color.value = selectedColor;
+    },
+    fuck: function (value) {
+      console.log(value);
     },
     createDice: function () {
       var quant = Number(this.selected.quant.value),
@@ -125,28 +128,33 @@ export default {
 
       if ( quant <= 0 || !Number.isInteger(quant) || quant > 1000) {
         this.selected.quant.error = true;
+        noErrors = false;
       } else {
         this.selected.quant.error = false;
         output.quant = quant;
       }
       if ( faces <= 0 || !Number.isInteger(faces)) {
         this.selected.faces.error = true;
+        noErrors = false;
       } else {
         this.selected.faces.error = false;
         output.faces = faces;
       }
-      if (!Number.isInteger(modif)) { // || modif != null || modif != ''
-        if (modif != null && modif != '') {
-          this.errors.push('Коряый модификатор');
-        }
+      if (!Number.isInteger(modif)) {
+        this.selected.modif.error = true;
+        noErrors = false;
+      } else {
+        this.selected.modif.error = false;
+        output.modif = modif;
       }
       if (!color) {
         this.selected.color.error = true;
+        noErrors = false;
       } else {
         this.selected.color.error = false;
         output.color = color;
       }
-      console.log(output);
+      console.log(output, noErrors);
     }
   }
 }
