@@ -2,24 +2,28 @@
   <modal  theme="dim" title="Создать комбинацию" :showActions="false">
     <div>
       <label for="Quant-dicecreator" class="modal-content-title">Количество кубиков</label>
-      <input id="Quant-dicecreator" v-model.number="selected.quant.value" max="4" type="number" placeholder="0" name="quant" class="modal-inp">
-      <div v-if="selected.quant.error" class="modal-content-anno">
+      <input id="Quant-dicecreator" v-model.number="selected.quant.value" max="4" type="number" placeholder="0" name="quant"
+        :class="['modal-inp', selected.quant.error ? 'modal-inp-error' : '']">
+      <div v-if="selected.quant.error" class="modal-content-anno modal-content-error">
         {{selected.quant.message}}
       </div>
     </div>
     <hr>
     <div>
       <label for="Faces-dicecreator" class="modal-content-title">Количество граней на кубике</label>
-      <input id="Faces-dicecreator" v-model.number="selected.faces.value" type="number" placeholder="0" name="faces" class="modal-inp">
-      <div v-if="selected.faces.error" class="modal-content-anno">
+      <input id="Faces-dicecreator" v-model.number="selected.faces.value" type="number" placeholder="0" name="faces"
+        :class="['modal-inp', selected.faces.error ? 'modal-inp-error' : '']">
+      <div v-if="selected.faces.error" class="modal-content-anno modal-content-error">
         {{selected.faces.message}}
       </div>
     </div>
     <hr>
-    <label for="Modif-dicecreator" class="modal-content-title">Модификатор</label>
-    <input id="Modif-dicecreator" v-model.number="selected.modif.value" type="number" placeholder="0" name="faces" class="modal-inp">
-    <div class="modal-content-anno">
-      {{selected.modif.message}}
+    <div>
+      <label for="Modif-dicecreator" class="modal-content-title">Модификатор</label>
+      <input id="Modif-dicecreator" v-model.number="selected.modif.value" type="number" placeholder="0" name="faces" class="modal-inp">
+      <div class="modal-content-anno">
+        {{selected.modif.message}}
+      </div>
     </div>
     <hr>
     <div class="modal-content-title">Цвет</div>
@@ -31,7 +35,7 @@
         :key="index"
         v-for="(color, index) in colors"></button>
     </div>
-    <div v-if="selected.color.error" class="modal-content-anno">
+    <div v-if="selected.color.error" :class="['modal-content-anno', selected.color.error ? 'modal-content-error' : '']">
       {{selected.color.message}}
     </div>
     <hr>
@@ -50,17 +54,17 @@ export default {
       selected: {
         quant: {
           value: null,
-          message: 'Укажите положительное целое число кубиков',
+          message: 'Укажите положительное целое число кубиков не больше 1000',
           error: false
         },
         faces: {
           value: null,
-          message: 'Укажите целое положительное число граней',
+          message: 'Укажите целое положительное число граней не больше 1000',
           error: false
         },
         modif: {
           value: null,
-          message: '',
+          message: 'Укажите положительное или отрицательное целое число не больше 1000 или оставьте поле пустым, если модификатор не требуется.',
           error: false
         },
         color: {
@@ -128,6 +132,7 @@ export default {
       if ( faces <= 0 || !Number.isInteger(faces)) {
         this.selected.faces.error = true;
       } else {
+        this.selected.faces.error = false;
         output.faces = faces;
       }
       if (!Number.isInteger(modif)) { // || modif != null || modif != ''
@@ -138,6 +143,7 @@ export default {
       if (!color) {
         this.selected.color.error = true;
       } else {
+        this.selected.color.error = false;
         output.color = color;
       }
       console.log(output);

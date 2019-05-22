@@ -86,6 +86,7 @@ export default {
   margin-bottom: 30px;
 }
 .modal-content { overflow: hidden;}
+.modal-content-error { color: #f5828d;}
 .modal-content-title {
   margin-bottom: 10px;
   text-transform: uppercase;
@@ -124,6 +125,7 @@ export default {
   font-size: 26px;
   padding: 0 8px;
 }
+.modal-inp-error { border-color: #f5828d;}
 .modal-btn:hover {
   background-color: #fff;
 }
