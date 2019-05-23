@@ -121,7 +121,7 @@ export default {
   border: 0;
   border-bottom: 2px solid #e2e2e2;
   color: #e2e2e2;
-  width: 64px;
+  width: 86px;
   font-size: 26px;
   padding: 0 8px;
 }

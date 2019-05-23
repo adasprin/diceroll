@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
+    log: [],
     settings: {
       negativeresult: false,
       critical: true,
@@ -19,9 +20,9 @@ export const store = new Vuex.Store({
       {quant: 1, faces: 12},
       {quant: 1, faces: 20},
       {quant: 1, faces: 100},
-      {quant: 1, faces: 4, modif: -5}],
-    dicebag: {},
-    log: [],
+      {quant: 1, faces: 4, modif: -5}
+    ],
+    dicebag: [],
     counter: 0
   },
   mutations: {
@@ -34,18 +35,14 @@ export const store = new Vuex.Store({
       state.counter++;
     },
     clearLog (state) {
-      state.log.splice(0, state.log.length);
+      console.log('!');
+      state.log = [];
       state.counter = 0;
     },
     changeSetting (state, options) {
-      //console.log(options.setting, options.data);
       state.settings[options.setting] = options.data;
-
-      //var newval = value.replace(/\D+/g,"");
-      //console.log(typeof(value));
     },
     changeSepaeach (state, value){
-
       state.settings.sepaeach = value;
       state.counter = 0;
     },

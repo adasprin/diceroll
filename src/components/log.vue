@@ -19,7 +19,7 @@
 
 <script>
 export default {
-name: 'log',
+  name: 'log',
   props: {
     result: String()
   },
@@ -33,12 +33,6 @@ name: 'log',
   },
   computed: {}
 }
-      /*console.log(
-        `%c Сообщение %c ${newVal} %c`,
-        'background:#35495e; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
-        'background:#41b883; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
-        'background:transparent'
-      )*/
 </script>
 <style>
 @import url('https://fonts.googleapis.com/css?family=Comfortaa');
@@ -59,7 +53,8 @@ name: 'log',
     background-size: 250px;
 }
 .log-list-opacitybefore .log-item { opacity: .5;}
-.log-list-opacitybefore .log-item:nth-child(1) { opacity: 1;}
+.log-list-opacitybefore .log-item:nth-child(1), .log-list-opacitybefore .log-item:hover { opacity: 1;}
+
 .log-rec {
   border-left-width: 4px;
   border-left-style: solid;

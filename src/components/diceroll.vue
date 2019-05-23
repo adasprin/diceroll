@@ -12,15 +12,14 @@
       <log/>
     </div>
     <div id="Controls">
-      <button class="controls-action" @click="opndDicecreator=true">+</button>
+      <button class="controls-action" @click="resetdicebag()">Ресет</button>
+      <button class="controls-action" @click="clearLog()">Очистить лог</button>
+      <button class="controls-action" @click="opndDicecreator=true">Добавить кубик</button>
       <dicecreator v-if="opndDicecreator" @closeDicecreator="opndDicecreator=false"/>
 
-      <button class="controls-action" @click="opndSettings=true">НАСТРОЙКИ</button>
+      <button class="controls-action" @click="opndSettings=true">Настройки</button>
       <settings v-if="opndSettings" @hideSettings="opndSettings=false"/>
 
-      <button class="controls-action" @click="resetdicebag()">РЕСЕТ</button>
-      <button class="controls-action">INFO: {{this.$store.state.log.length}}</button>
-      <button class="controls-action" @click="clearLog()">Х</button>
     </div>
   </div>
 </template>
@@ -104,6 +103,7 @@ export default {
   font-size: 12px;
   margin-left: 4px;
   border: 1px solid #800080;
+  text-transform: uppercase;
 }
 .controls-action:hover {
   background: #9a2f9a;
