@@ -20,7 +20,7 @@ export const store = new Vuex.Store({
       {quant: 1, faces: 20},
       {quant: 1, faces: 100},
       {quant: 1, faces: 4, modif: -5}],
-    dicebag: {},
+    dicebag: [],
     log: [],
     counter: 0
   },
@@ -38,11 +38,7 @@ export const store = new Vuex.Store({
       state.counter = 0;
     },
     changeSetting (state, options) {
-      //console.log(options.setting, options.data);
       state.settings[options.setting] = options.data;
-
-      //var newval = value.replace(/\D+/g,"");
-      //console.log(typeof(value));
     },
     changeSepaeach (state, value){
 

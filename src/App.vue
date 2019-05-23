@@ -13,11 +13,6 @@
 export default {
   name: 'app'
 }
-/*
-    <div id="Nav">
-      <router-link to="/">Кубомёт</router-link> |
-      <router-link to="/feedback">Пожаловаться</router-link>
-    </div>*/
 </script>
 <style>
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700');
