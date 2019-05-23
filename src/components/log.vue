@@ -1,6 +1,6 @@
 <template>
   <div id="Log">
-    <div class="log-list">
+    <div :class="['log-list', this.$store.state.settings.opacitybefore ? 'log-list-opacitybefore' : '']">
       <div class="log-item" :key="index" v-for="(record, index) in records">
         <div v-if="!record.issepa">
           <div class="log-rec" :style="{'border-left-color': record.color}">
@@ -58,6 +58,8 @@ name: 'log',
   background: #fff url(../assets/log_bg_1.png) center no-repeat;
     background-size: 250px;
 }
+.log-list-opacitybefore .log-item { opacity: .5;}
+.log-list-opacitybefore .log-item:nth-child(1) { opacity: 1;}
 .log-rec {
   border-left-width: 4px;
   border-left-style: solid;

@@ -12,6 +12,10 @@
     <div class="modal-content-anno">
       В логе будут отмечаться 1d20 броски в которых выпали 20-ка или 1-ка.
     </div>
+    <div class="modal-content-title"><checkbox @change="changeSetting($event, 'opacitybefore')" :checked="this.$store.state.settings.opacitybefore">Предыдущие броски полупрозрачные</checkbox></div>
+    <div class="modal-content-anno">
+      В истории бросков, предыдущие броски будут отображаться полупрозрачно.
+    </div>
     <div class="modal-content-title"><checkbox @change="changeSetting($event, 'negativeresult')" :checked="this.$store.state.settings.negativeresult">Отрицательный результат</checkbox></div>
     <div class="modal-content-anno">
       Минимальный результат броска кубиков не ограничивается еденицей. Такой результат может получиться при бороске с модификатором.

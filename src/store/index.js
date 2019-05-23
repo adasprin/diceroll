@@ -8,7 +8,8 @@ export const store = new Vuex.Store({
     settings: {
       negativeresult: false,
       critical: true,
-      sepaeach: 6
+      sepaeach: 6,
+      opacitybefore: false
     },
     defaultDicebag: [
       {quant: 1, faces: 4},
@@ -50,6 +51,10 @@ export const store = new Vuex.Store({
     },
     changeCritical (state, value) {
       state.settings.critical = value;
+    },
+    addDice (state, value) {
+      state.dicebag.push(value);
+      // Синхронизировать с ЛОКАЛСТОРАГЕ!
     }
   }
 })

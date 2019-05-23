@@ -1,6 +1,6 @@
 <template>
   <modal  theme="dim" title="Создать комбинацию" :showActions="false">
-    <div>
+    <!--div>
       <label for="Quant-dicecreator" class="modal-content-title">Количество кубиков</label>
       <input id="Quant-dicecreator" v-model.number="selected.quant.value" type="number" placeholder="0" name="quant"
         :class="['modal-inp', selected.quant.error ? 'modal-inp-error' : '']">
@@ -26,7 +26,24 @@
         {{selected.modif.message}}
       </div>
     </div>
-    <hr>
+    <hr-->
+    <div v-for="(item, index) in selected" :key="index">
+      <div v-if="index!='color'">
+        <label :for="index+'-dicecreator'" class="modal-content-title">Модификатор</label>
+        <input :id="index+'-dicecreator'" v-model.number="item.value" type="number" placeholder="0" :name="index" 
+          :class="['modal-inp', item.error ? 'modal-inp-error' : '']">
+        <div v-if="item.error && index!='modif'" class="modal-content-anno" :class="['modal-content-anno', item.error ? 'modal-content-error' : '']">
+          {{item.message}}
+        </div>
+        <div v-else-if="index=='modif'" class="modal-content-anno" :class="['modal-content-anno', item.error ? 'modal-content-error' : '']">
+          {{item.message}}
+        </div>
+        <hr>
+      </div>
+    </div>
+
+
+
     <div class="modal-content-title">Цвет</div>
     <div class="sclrpcker">
       <button
@@ -40,7 +57,6 @@
       {{selected.color.message}}
     </div>
     <hr>
-    <div v-for="(error, index) in errors" :key="index">- {{error}}</div>
     <button @click="createDice()" class="modal-btn dicecreator-save">Создать</button>
     <button class="modal-btn" @click="closeDicecreator()">Отмена</button>
   </modal>
@@ -109,9 +125,6 @@ export default {
     selectColor: function (selectedColor) {
       this.selected.color.value = selectedColor;
     },
-    fuck: function (value) {
-      console.log(value);
-    },
     createDice: function () {
       var quant = Number(this.selected.quant.value),
           faces = Number(this.selected.faces.value),
@@ -124,8 +137,6 @@ export default {
             color: null
           },
           noErrors = true;
-      this.errors = [];
-
       if ( quant <= 0 || !Number.isInteger(quant) || quant > 1000) {
         this.selected.quant.error = true;
         noErrors = false;
@@ -133,7 +144,7 @@ export default {
         this.selected.quant.error = false;
         output.quant = quant;
       }
-      if ( faces <= 0 || !Number.isInteger(faces)) {
+      if ( faces <= 0 || !Number.isInteger(faces) || faces > 1000) {
         this.selected.faces.error = true;
         noErrors = false;
       } else {
@@ -155,6 +166,9 @@ export default {
         output.color = color;
       }
       console.log(output, noErrors);
+      if (noErrors) {
+        this.$store.commit('addDice', output);
+      }
     }
   }
 }
