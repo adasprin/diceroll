@@ -141,7 +141,7 @@ export default {
 
 /* THEME DIM */
 .modal-theme-dim { background-color: #34505880;}
-.modal-theme-dim .modal-view{ background: #171717;}
+.modal-theme-dim .modal-view { background: #171717;}
 .modal-theme-dim hr { background: #2f2f2f;}
 .modal-theme-dim .modal-inp { background: #212121;}
 /*/ THEME DIM */

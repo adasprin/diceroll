@@ -12,14 +12,16 @@ export const store = new Vuex.Store({
       opacitybefore: false
     },
     defaultDicebag: [
-      { quant: 1, faces: 4 },
+      
       { quant: 1, faces: 6, color: '#cddc39' },
-      { quant: 1, faces: 8 },
-      { quant: 1, faces: 10 },
-      { quant: 1, faces: 12 },
-      { quant: 1, faces: 20 },
-      { quant: 1, faces: 100 },
-      { quant: 1, faces: 4, modif: -5 }],
+      { quant: 1, faces: 12, color: '#f44336' },
+      { quant: 1, faces: 4, color: '#9c27b0'},
+      { quant: 1, faces: 8, color: '#ff9800' },
+      { quant: 1, faces: 10, color: '#00bcd4' },
+      { quant: 1, faces: 20, color: '#03a9f4' },
+      { quant: 1, faces: 2, color: '#795548' },
+      { quant: 1, faces: 100, color: '#4caf50' }
+    ],
     dicebag: [],
     log: [],
     counter: 0
