@@ -46,7 +46,7 @@ export default {
     if (localStorage.dicebag) {
       this.dicebag = JSON.parse(localStorage.dicebag);
     } else {
-      this.resetdicebag();
+      this.resetDicebag();
     }
   },
   watch: {
@@ -56,9 +56,9 @@ export default {
   },
   methods: {
     // Устанавливаем дефолтные кубы
-    resetdicebag: function(){
+    resetDicebag: function(){
       localStorage.dicebag = JSON.stringify(this.$store.state.defaultDicebag);
-      this.dicebag = JSON.parse(localStorage.dicebag);
+      this.dicebag = JSON.parse(localStorage.dicebag); // Тут мутация котоая будет из локал стораджа тянуть дату в хранилище
     },
     sendRecord (data) {
       var tstamp = new Date().getTime();

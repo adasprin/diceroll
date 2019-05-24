@@ -1,7 +1,7 @@
 <template>
   <modal title="Настройки" @hideModal="hideSettings">    
     <div class="modal-content-title">Разделитель</div>
-    <input class="modal-inp" v-model.number="sepaeach" type="text">
+    <input class="modal-inp" v-model.number="sepaeach" type="number">
     <div class="modal-content-anno">Разделитель будет размещен после указанного количества бросков. Укажтите 0 чтобы убрать разделитель.</div>
     <hr>
     <div class="modal-content-title">
@@ -39,8 +39,8 @@
         get () {
           return this.$store.state.settings.sepaeach;
         },
-        set (value) {        
-          this.$store.commit('changeSepaeach', value);
+        set (value) {
+          this.$store.commit('changeSetting', {setting: 'sepaeach', data: value});
         }
       }
     },

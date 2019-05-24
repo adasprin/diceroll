@@ -54,7 +54,7 @@ export default {
         
       }
       equal = equal + modif;
-      if (!this.$store.state.settings.nullmodif) {
+      if (!this.$store.state.settings.negativeresult) {
         equal <= 0 ? equal = 1 : equal;
       }
       var options = {xdy, equal, color, modif, equallog, crit};
