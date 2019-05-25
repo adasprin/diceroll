@@ -2,17 +2,17 @@
   <div id="Diceroll">
     <div id="Table">
       <div id="Dicebag">
-        <dice @rolled='sendRecord' 
+        <dice
           :quant="dice.quant" 
           :faces="dice.faces" 
           :modif="dice.modif" 
           :key="index"
-          :color="dice.color" v-for="(dice, index) in dicebag"/>
+          :color="dice.color" v-for="(dice, index) in dicebag"
+        />
       </div>
       <log/>
     </div>
     <div id="Controls">
-      <button class="controls-action" @click="resetdicebag()">Ресет</button>
       <button class="controls-action" @click="clearLog()">Очистить лог</button>
       <button class="controls-action" @click="opndDicecreator=true">Добавить кубик</button>
       <dicecreator v-if="opndDicecreator" @closeDicecreator="opndDicecreator=false"/>
@@ -33,37 +33,24 @@ export default {
   name: 'diceroll',
   data: function () {
     return {
-      dicebag: Array(),
-      settings: {
-        opacitybefore: false,
-        sepaeach: 6
-      },
       opndSettings: false,
       opndDicecreator: false
     }
   },
   mounted() {
     if (localStorage.dicebag) {
-      this.dicebag = JSON.parse(localStorage.dicebag);
+      this.$store.commit('applyUserDicebag');
     } else {
-      this.resetDicebag();
+      localStorage.dicebag = JSON.stringify(this.$store.state.defaultDicebag);
+      this.$store.commit('applyUserDicebag');
     }
   },
-  watch: {
-    dicebag(newDicebag) {
-      localStorage.dicebag = JSON.stringify(newDicebag);
+  computed: {
+    dicebag(){
+      return this.$store.state.dicebag;
     }
   },
   methods: {
-    // Устанавливаем дефолтные кубы
-    resetDicebag: function(){
-      localStorage.dicebag = JSON.stringify(this.$store.state.defaultDicebag);
-      this.dicebag = JSON.parse(localStorage.dicebag); // Тут мутация котоая будет из локал стораджа тянуть дату в хранилище
-    },
-    sendRecord (data) {
-      var tstamp = new Date().getTime();
-      this.newRecord = data.string+'_'+ tstamp;
-    },
     clearLog: function(){
       this.$store.commit('clearLog');
     }
@@ -110,5 +97,18 @@ export default {
 }
 .controls-action:focus {
   border: 1px dotted #ca3cca;;
+}
+
+
+.list-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
+}
+.list-enter, .list-leave-to /* .list-leave-active до версии 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>

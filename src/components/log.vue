@@ -5,15 +5,18 @@
         <div v-if="this.$store.state.log.length == 0" :class="['log-list-cover', this.$store.state.log.length != 0 ? 'log-list-hidden' : false]"></div>
       </transition>
       <div class="log-item" :class="[index == 0 ? 'log-item-first' : false]" :key="index" v-for="(record, index) in records">
-        <div v-if="!record.issepa">
+        <template v-if="!record.issepa">
           <div class="log-rec" :style="{'border-left-color': record.color}">
-            <div class="log-rec-equal" :style="{'color': record.color}">{{record.equal}}<span class="log-rec-crit">cr hit</span></div>
-            <div class="log-rec-xdym">{{record.xdy}}{{(record.modif != 0) ? record.modif : ''}}</div>
+            <div class="log-rec-equal" :style="{'color': record.color}">{{record.equal}}
+              <span v-if="record.crit == 'CRIT_HIT' && $store.state.settings.critical" class="log-rec-crit log-rec-crit-hit">🌟 CRIT HIT</span>
+              <span v-else-if="record.crit == 'CRIT_FAIL' && $store.state.settings.critical" class="log-rec-crit log-rec-crit-fail">💀 CRIT FAIL</span>
+            </div>
+            <div class="log-rec-xdym">{{record.xdy}}{{(record.modif > 0) ? '+' : ''}}{{(record.modif != 0) ? record.modif : ''}}</div>
             <div v-if="record.equallog.length > 1" class="log-rec-equallog">
               <span :key="index" v-for="(roll, index) in record.equallog">{{roll}}<span class="log-rec-equallog-plus" v-if="index+1 != record.equallog.length"> + </span></span>
             </div>
           </div>
-        </div>
+        </template>
         <hr v-else>
       </div>
     </div>
@@ -23,18 +26,11 @@
 <script>
 export default {
   name: 'log',
-  props: {
-    result: String()
-  },
-  methods: {
-  },
-  watch: {},
-  data: function (){
-    return {
-      records: this.$store.state.log
+  computed: {
+    records() {
+      return this.$store.state.log;
     }
-  },
-  computed: {}
+  }
 }
 </script>
 <style>
@@ -52,6 +48,7 @@ export default {
   box-shadow: 0 1px 2px rgba(0,0,0,.1);
   height: 450px;
   background-color: #fff;
+  position: relative;
 }
 
 .log-list-cover { 
@@ -84,7 +81,16 @@ export default {
 .log-item-first .log-rec { font-size: 28px; opacity: 1;}
 .opaclogold .LogReс:hover,.LogReс:hover { opacity: 1; background: #fbfbfb;}
 .log-rec > div { flex-grow: 1;}
-.log-rec-crit { font-size: 16px; }
+.log-rec .log-rec-equal { position: relative;}
+.log-rec-crit {
+    font-size: 12px;
+    color: #fff;
+    padding: 4px;
+    border-radius: 2px;
+    vertical-align: middle;
+}
+.log-rec-crit-hit {background: #87b500;}
+.log-rec-crit-fail { background: #171717;}
 /*.LogRecResult { text-align: right;}*/
 .log-rec-xdym { text-align: right;}
 .log-rec-equallog { width: 100%; font-size: 14px;}

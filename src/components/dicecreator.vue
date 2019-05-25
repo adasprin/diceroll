@@ -142,6 +142,7 @@ export default {
       console.log(output, noErrors);
       if (noErrors) {
         this.$store.commit('addDice', output);
+        this.closeDicecreator();
       }
     }
   }

@@ -51,7 +51,6 @@ export default {
         } else if (equal == 1) {
           crit = 'CRIT_FAIL';
         }
-        
       }
       equal = equal + modif;
       if (!this.$store.state.settings.negativeresult) {
