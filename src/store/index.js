@@ -11,7 +11,7 @@ export const store = new Vuex.Store({
       sepaeach: 6,
       opacitybefore: false
     },
-    defaultDicebag: [
+    dicebag: [
       { quant: 1, faces: 6, color: '#cddc39' },
       { quant: 1, faces: 12, color: '#f44336' },
       { quant: 1, faces: 4, color: '#9c27b0'},
@@ -21,18 +21,24 @@ export const store = new Vuex.Store({
       { quant: 1, faces: 2, color: '#795548' },
       { quant: 2, faces: 100, color: '#4caf50' }
     ],
-    dicebag: [],
     log: [],
     counter: 0
   },
   mutations: {
     addRecord(state, record) {
+      if (state.log.length > 39) {
+        state.log.splice(-1,1);
+      }
       if (state.counter == state.settings.sepaeach && state.settings.sepaeach != 0) {
         state.log.unshift({ issepa: true });
         state.counter = 0;
+        if (state.log.length > 39) {
+          state.log.splice(-1,1);
+        }
       }
       state.log.unshift(record);
       state.counter++;
+
     },
     clearLog(state) {
       state.log.splice(0, state.log.length);
@@ -50,6 +56,9 @@ export const store = new Vuex.Store({
     },
     applyUserDicebag(state) {
       state.dicebag = JSON.parse(localStorage.dicebag);
+    },
+    applyUserSettings(state) {
+      state.settings = JSON.parse(localStorage.settings);
     },
     saveUserDicebag(state) {
       localStorage.dicebag = JSON.stringify(state.dicebag);

@@ -19,7 +19,6 @@
 
       <button class="controls-action" @click="opndSettings=true">Настройки</button>
       <settings v-if="opndSettings" @hideSettings="opndSettings=false"/>
-
     </div>
   </div>
 </template>
@@ -41,19 +40,24 @@ export default {
     if (localStorage.dicebag) {
       this.$store.commit('applyUserDicebag');
     } else {
-      localStorage.dicebag = JSON.stringify(this.$store.state.defaultDicebag);
-      this.$store.commit('applyUserDicebag');
+      localStorage.dicebag = JSON.stringify(this.$store.state.dicebag);
+    }
+    if (localStorage.settings) {
+      this.$store.commit('applyUserSettings');
+    } else {
+      localStorage.settings = JSON.stringify(this.$store.state.settings);
     }
   },
   computed: {
-    dicebag(){
+    dicebag() {
       return this.$store.state.dicebag;
     }
   },
   watch: {
-    dicebag: function (newDicebag, oldDicebag) {
+    dicebag: function () {
       this.$store.commit('saveUserDicebag');
       // Тут сколькзкий момент, дайсбаг обновляется при старте прилы, и выходит что мы сразу же его записываем в ЛС
+      // Возможно надо будет запилить вотчер как в настройках
     }
   },
   methods: {

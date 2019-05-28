@@ -4,6 +4,7 @@
     <input class="modal-inp" v-model.number="sepaeach" type="number">
     <div class="modal-content-anno">Разделитель будет размещен после указанного количества бросков. Укажтите 0 чтобы убрать разделитель.</div>
     <hr>
+    <hr>
     <div class="modal-content-title">
       <checkbox @change="changeSetting($event, 'critical')" :checked="this.$store.state.settings.critical">
         Критическое попадание и провал
@@ -21,7 +22,7 @@
       Минимальный результат броска кубиков не ограничивается еденицей. Такой результат может получиться при бороске с модификатором.
     </div>
     <hr>
-    <button class="modal-btn">Сбросить настройки</button>
+    <button class="modal-btn" @click="reserDiceroll()">Сбросить настройки</button>
     <div class="modal-content-anno">Все комбинации кубиков и настройки вернутся в исходное состояние. Страница будет перезагружена.</div>
     <hr>
     <div class="modal-content-anno">
@@ -34,6 +35,16 @@
   import checkbox from '@/components/checkbox.vue';
   export default {
     name: 'settings',
+    created: function() {
+      this.$store.watch(
+          function (state) {
+            return state.settings;
+          },
+          function (settings) {
+            localStorage.settings = JSON.stringify(settings);
+          }, {deep: true}
+      );
+    },
     computed: {
       sepaeach: {
         get () {
@@ -51,13 +62,14 @@
       changeSetting: function (data, setting) {
         var options = {setting, data};
         this.$store.commit('changeSetting', options);
+      },
+      reserDiceroll() {
+        localStorage.removeItem('dicebag');
+        localStorage.removeItem('settings');
+        location.reload();
       }
     },
-    components: {modal, checkbox},
-    beforeDestroy () {
-      //console.log('i`m dying');
-    }
-
+    components: {modal, checkbox}
   }
 </script>
 <style>
