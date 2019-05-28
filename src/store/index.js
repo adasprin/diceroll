@@ -50,6 +50,9 @@ export const store = new Vuex.Store({
     },
     applyUserDicebag(state) {
       state.dicebag = JSON.parse(localStorage.dicebag);
+    },
+    saveUserDicebag(state) {
+      localStorage.dicebag = JSON.stringify(state.dicebag);
     }
   }
 })

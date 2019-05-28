@@ -50,6 +50,12 @@ export default {
       return this.$store.state.dicebag;
     }
   },
+  watch: {
+    dicebag: function (newDicebag, oldDicebag) {
+      this.$store.commit('saveUserDicebag');
+      // Тут сколькзкий момент, дайсбаг обновляется при старте прилы, и выходит что мы сразу же его записываем в ЛС
+    }
+  },
   methods: {
     clearLog: function(){
       this.$store.commit('clearLog');
