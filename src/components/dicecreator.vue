@@ -43,19 +43,19 @@ export default {
         quant: {
           title: 'Количество кубиков',
           value: null,
-          message: 'Укажите положительное целое число кубиков не больше 100',
+          message: 'Укажите положительное целое число кубиков не больше 1000',
           error: false
         },
         faces: {
           title: 'Количество граней на кубике',
           value: null,
-          message: 'Укажите целое положительное число граней не больше 100',
+          message: 'Укажите целое положительное число граней не больше 1000',
           error: false
         },
         modif: {
           title: 'Модификатор',
           value: null,
-          message: 'Укажите положительное или отрицательное целое число не больше 100, или укажите 0 если модификатор не требуется.',
+          message: 'Укажите положительное или отрицательное целое число не больше 1000, или укажите 0 если модификатор не требуется.',
           error: false
         },
         color: {
@@ -111,21 +111,21 @@ export default {
             color: null
           },
           noErrors = true;
-      if ( quant <= 0 || !Number.isInteger(quant) || quant > 100) {
+      if ( quant <= 0 || !Number.isInteger(quant) || quant > 1000) {
         this.selected.quant.error = true;
         noErrors = false;
       } else {
         this.selected.quant.error = false;
         output.quant = quant;
       }
-      if ( faces <= 0 || !Number.isInteger(faces) || faces > 100) {
+      if ( faces <= 0 || !Number.isInteger(faces) || faces > 1000) {
         this.selected.faces.error = true;
         noErrors = false;
       } else {
         this.selected.faces.error = false;
         output.faces = faces;
       }
-      if (!Number.isInteger(modif) || modif > 100 || modif < -100) {
+      if (!Number.isInteger(modif) || modif > 1000 || modif < -1000) {
         this.selected.modif.error = true;
         noErrors = false;
       } else {
