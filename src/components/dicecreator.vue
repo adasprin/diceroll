@@ -139,7 +139,6 @@ export default {
         this.selected.color.error = false;
         output.color = color;
       }
-      console.log(output, noErrors);
       if (noErrors) {
         this.$store.commit('addDice', output);
         this.closeDicecreator();
