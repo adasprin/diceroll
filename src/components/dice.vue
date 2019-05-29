@@ -38,12 +38,16 @@ export default {
           equal = 0,
           crit = false,
           currand = '',
-          equallog = [],
+          equallog = '',
           xdy = quant + 'd' + faces;         
       for ( var i = quant; i > 0; i--) {
         currand = randomNumber(1, faces);
         equal = equal + currand;
-        equallog.push(currand);
+        if (i > 1) {
+          equallog += currand + '<span class="log-rec-equallog-plus"> + </span>';
+        } else {
+          equallog += currand;
+        }
       }
       if (quant == 1 && faces == 20) {
         if (equal == 20) {
@@ -56,7 +60,7 @@ export default {
       if (!this.$store.state.settings.negativeresult) {
         equal <= 0 ? equal = 1 : equal;
       }
-      var options = {xdy, equal, color, modif, equallog, crit};
+      var options = {xdy, equal, color, modif, equallog, crit, quant};
       this.$store.commit('addRecord', options);
     }
   }

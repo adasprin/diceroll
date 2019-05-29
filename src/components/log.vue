@@ -12,9 +12,7 @@
               <span v-else-if="record.crit == 'CRIT_FAIL' && $store.state.settings.critical" class="log-rec-crit log-rec-crit-fail">💀 CRIT FAIL</span>
             </div>
             <div class="log-rec-xdym">{{record.xdy}}{{(record.modif > 0) ? '+' : ''}}{{(record.modif != 0) ? record.modif : ''}}</div>
-            <div v-if="record.equallog.length > 1" class="log-rec-equallog">
-              <span :key="index" v-for="(roll, index) in record.equallog">{{roll}}<span class="log-rec-equallog-plus" v-if="index+1 != record.equallog.length"> + </span></span>
-            </div>
+            <div v-if="record.quant > 1 || record.modif" class="log-rec-equallog" v-html="record.equallog"></div>
           </div>
         </template>
         <hr v-else>

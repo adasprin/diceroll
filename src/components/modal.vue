@@ -65,7 +65,7 @@ export default {
   color: #e2e2e2;
   transition: opacity .3s ease;
   z-index: 900;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .modal-theme-dim .modal-view{
   background: #171717;
