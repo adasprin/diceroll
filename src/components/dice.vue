@@ -1,5 +1,5 @@
 <template>
-  <button class="dice" @click='roll'>
+  <button :class="['dice', quant > 99 || faces > 99 ? 'dice-longtext' : false ]" @click='roll'>
     <span class="dice-color" :style="{'background-color': color}"></span>
     {{quant}}d{{faces}}</button>
 </template>
@@ -82,7 +82,10 @@ export default {
     border-radius: 2px;
     background: rgb(245,245,245) linear-gradient(#f4f4f4, #f1f1f1);
     position: relative;
+    line-height: 23px;
+    vertical-align: top;
   }
+  .dice-longtext { font-size: 16px;}
   .dice:nth-child(2n) {
     margin-right: 0;
   }
