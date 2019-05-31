@@ -18,7 +18,7 @@ export const store = new Vuex.Store({
       { quant: 1, faces: 8, color: '#ff9800' },
       { quant: 1, faces: 10, color: '#00bcd4' },
       { quant: 1, faces: 20, color: '#03a9f4' },
-      { quant: 1, faces: 2, color: '#795548' },
+      { quant: 1, faces: 2, color: '#607d8b' },
       { quant: 1, faces: 100, color: '#4caf50' }
     ],
     log: [],
