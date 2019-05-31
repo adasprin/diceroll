@@ -1,18 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import home from './views/home.vue'
-import pagenotfound from './views/pagenotfound.vue'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: home
-    },
-    { path: "*", component: pagenotfound }
+    { path: '/', name: 'home', component: home },
+    { path: "*", redirect: { name: 'home' } }
   ],
   mode: 'history'
 })
