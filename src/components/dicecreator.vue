@@ -2,13 +2,13 @@
   <modal  theme="dim" title="Создать комбинацию" :showActions="false">
     <div v-for="(item, index) in selected" :key="index">
       <div v-if="index!='color'">
-        <label :for="index+'-dicecreator'" class="modal-content-title">{{item.title}}</label>
-        <input :id="index+'-dicecreator'" v-model.number="item.value" type="number" :name="index" 
+        <label :for="index + '-dicecreator'" class="modal-content-title">{{item.title}}</label>
+        <input :id="index + '-dicecreator'" v-model.number.lazy="item.value" type="number" :name="index" 
           :class="['modal-inp', item.error ? 'modal-inp-error' : '']">
-        <div v-if="item.error && index!='modif'" class="modal-content-anno" :class="['modal-content-anno', item.error ? 'modal-content-error' : '']">
+        <div v-if="item.error && index !== 'modif'" class="modal-content-anno" :class="['modal-content-anno', item.error ? 'modal-content-error' : '']">
           {{item.message}}
         </div>
-        <div v-else-if="index=='modif'" class="modal-content-anno" :class="['modal-content-anno', item.error ? 'modal-content-error' : '']">
+        <div v-else-if=" index === 'modif'" class="modal-content-anno" :class="['modal-content-anno', item.error ? 'modal-content-error' : '']">
           {{item.message}}
         </div>
         <hr>

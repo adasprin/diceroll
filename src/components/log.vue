@@ -50,11 +50,9 @@ export default {
 }
 
 .log-list-cover { 
-  background: url(../assets/log_bg_1.png) no-repeat center; background-size: 250px; content: ''; position: absolute;
-  /*background: url(../assets/myr.gif) no-repeat center; background-size: 250px; content: ''; position: absolute; */
+  background: url(../assets/log_bg_1.png) no-repeat center; background-size: 310px; content: ''; position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   opacity: 1;
-  /*transition: 500ms ease-in-out opacity;*/
 }
 .fail-enter-active, .fail-leave-active {
   transition: opacity .5s;

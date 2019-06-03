@@ -4,7 +4,6 @@
     <input class="modal-inp" v-model.number="sepaeach" type="number">
     <div class="modal-content-anno">Разделитель будет размещен после указанного количества бросков. Укажтите 0 чтобы убрать разделитель.</div>
     <hr>
-    <hr>
     <div class="modal-content-title">
       <checkbox @change="changeSetting($event, 'critical')" :checked="this.$store.state.settings.critical">
         Критическое попадание и провал
