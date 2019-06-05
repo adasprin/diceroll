@@ -121,4 +121,10 @@ export default {
   opacity: 0;
   transform: translateY(30px);
 }
+@media ( max-width: 768px ) {
+  #Diceroll { width: auto; margin: 0 20px;}
+  #Table { flex-direction: column-reverse;}
+  #Dicebag, #Log { width: auto;}
+  #Log { margin-bottom: 20px;}
+}
 </style>

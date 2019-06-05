@@ -16,16 +16,14 @@ export default {
 </script>
 <style>
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700');
-#Nav {
-  padding: 20px;
-}
+#Nav { padding: 20px;}
 html { background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%); background-attachment: fixed;}
 html, body { padding: 0; margin: 0;}
 body { }
 header {text-align: center; padding: 40px 0 20px;}
 #Logo { height: 160px;}
 body, input, textarea, button, select {
-  font-family: 'Open Sans';
+  font-family: 'Open Sans', Tahoma;
   font-weight: 400;
   font-size: 15px;
   color: #545454;
@@ -46,5 +44,10 @@ input::-webkit-inner-spin-button {
 }
 input[type='number'] {
     -moz-appearance: textfield;
+}
+
+@media ( max-width: 768px ) {
+  #Logo { height: 90px;}
+  header { padding: 10px 0 0;}
 }
 </style>

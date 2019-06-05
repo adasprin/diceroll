@@ -62,7 +62,7 @@ export default {
 }
 /*.log-list-cover-hidden { opacity: 0;}*/
 .log-list-opacitybefore .log-item { opacity: .5;}
-.log-list-opacitybefore .log-item:nth-child(1), .log-list-opacitybefore .log-item:hover { opacity: 1;}
+.log-list-opacitybefore .log-item-first { opacity: 1;}
 
 .log-rec {
   border-left-width: 4px;
@@ -74,16 +74,17 @@ export default {
   flex-wrap: wrap;
 }
 .log-rec:hover { opacity: 1; background: #fbfbfb;}
-.log-item-first .log-rec { font-size: 28px; opacity: 1;}
+.log-item-first .log-rec { font-size: 28px;}
 .opaclogold .LogReс:hover,.LogReс:hover { opacity: 1; background: #fbfbfb;}
 .log-rec > div { flex-grow: 1;}
-.log-rec .log-rec-equal { position: relative;}
+.log-rec .log-rec-equal { display: flex; align-items: center;}
 .log-rec-crit {
     font-size: 12px;
     color: #fff;
-    padding: 4px;
+    padding: 4px 8px 4px 4px;
     border-radius: 2px;
     vertical-align: middle;
+    margin-left: 4px;
 }
 .log-rec-crit-hit {background: #87b500;}
 .log-rec-crit-fail { background: #171717;}
