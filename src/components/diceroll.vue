@@ -127,4 +127,10 @@ export default {
   #Dicebag, #Log { width: auto;}
   #Log { margin-bottom: 20px;}
 }
+@media ( max-width: 510px ) {
+  #Diceroll { margin: 0;}
+  #Table { border-radius: 0; padding: 0; border-radius: 0;}
+  #Dicebag, #Log { width: auto;}
+  #Log { margin-bottom: 20px;}
+}
 </style>

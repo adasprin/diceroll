@@ -41,6 +41,7 @@ export default {
   },
   methods: {
     hidewithFog: function (e) { // Закрываем при клике за пределами контента
+    console.log(e);
       if (e.target.classList.contains('modal')) {
         this.hideModal();
       }
