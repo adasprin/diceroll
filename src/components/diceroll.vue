@@ -13,7 +13,11 @@
       <log/>
     </div>
     <div id="Controls">
+      <button class="controls-action" @click="opndAbout=true">?</button>
+      <about v-if="opndAbout" @closeAbout="opndAbout=false"/>
+
       <button class="controls-action" @click="clearLog()">Очистить лог</button>
+
       <button class="controls-action" @click="opndDicecreator=true">Добавить кубик</button>
       <dicecreator v-if="opndDicecreator" @closeDicecreator="opndDicecreator=false"/>
 
@@ -28,12 +32,14 @@ import dice from '@/components/dice.vue';
 import log from '@/components/log.vue';
 import settings from '@/components/settings.vue';
 import dicecreator from '@/components/dicecreator.vue';
+import about from '@/components/about.vue';
 export default {
   name: 'diceroll',
   data: function () {
     return {
       opndSettings: false,
-      opndDicecreator: false
+      opndDicecreator: false,
+      opndAbout: false
     }
   },
   mounted() {
@@ -65,7 +71,7 @@ export default {
       this.$store.commit('clearLog');
     }
   },
-  components: {dice, log, settings, dicecreator}
+  components: {dice, log, settings, dicecreator, about}
 }
 </script>
 
