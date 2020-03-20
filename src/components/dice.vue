@@ -2,7 +2,7 @@
   <button :class="['dice', quant > 99 || faces > 99 ? 'dice-longtext' : false ]" @click='roll'>
     <span class="dice-color" :style="{'background-color': color}"></span>
     <span>{{quant}}d{{faces}}</span>
-    <span v-if="modif != 0" class="dice-modif" :style="{'color': color}">{{modif > 0 ? '+' + modif : modif}}</span>
+    <span v-if="modif != 0" :class="['dice-modif', modif > 9 || modif < -9 ? ' dice-modif-long' : false ]" :style="{'color': color}">{{modif > 0 ? '+' + modif : modif}}</span>
   </button> 
 </template>
 
@@ -98,7 +98,7 @@ export default {
     box-shadow: 0 1px 2px rgba(0,0,0,.1);
   }
   .dice:focus {
-    border: 1px dotted #8a8a8a;
+    border: 1px dashed #8a8a8a;
   }
   .dice:active {
     color: rgb(51,51,51);
@@ -126,15 +126,19 @@ export default {
     font-weight: 200;
     color: #d1d1d1;
     background: #f3f3f3;
-    width: 20px;
+    min-width: 20px;
     height: 20px;
-    border-radius: 100%;
+    border-radius: 12px;
     border: 1px solid #dbdbdb;
-  }
-  .dice:focus .dice-modif{
-    border: 1px dotted #8a8a8a;
   }
   .dice:hover .dice-modif {
     border: 1px solid rgb(198,198,198);
+  }
+  .dice:focus .dice-modif {
+    border: 1px dashed #8a8a8a;
+  }
+  .dice-modif-long {
+    font-size: 10px;
+    padding: 0 2px;
   }
 </style>

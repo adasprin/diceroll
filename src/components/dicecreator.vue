@@ -3,8 +3,7 @@
     <div v-for="(item, index) in selected" :key="index">
       <div v-if="index!='color'">
         <label :for="index + '-dicecreator'" class="modal-content-title">{{item.title}}</label>
-        <input :id="index + '-dicecreator'" v-model.number.lazy="item.value" type="number" :name="index" 
-          :class="['modal-inp', item.error ? 'modal-inp-error' : '']">
+        <input :id="index + '-dicecreator'" v-model.number.lazy="item.value" type="number" :name="index" :class="['modal-inp', item.error ? 'modal-inp-error' : '']">
         <div v-if="item.error && index !== 'modif'" class="modal-content-anno" :class="['modal-content-anno', item.error ? 'modal-content-error' : '']">
           {{item.message}}
         </div>
@@ -91,11 +90,6 @@ export default {
     closeDicecreator: function (){
       this.$emit('closeDicecreator');
     },
-    clearNumber: function () {
-      //this[model] = Number(this[model].replace(/[^-0-9+]/gim,''));
-      //var str='saafsdfsd+2e3432-sdgfdsg';
-      //alert();.replace(/[^-0-9+]/gim,'')
-    },
     selectColor: function (selectedColor) {
       this.selected.color.value = selectedColor;
     },
@@ -111,6 +105,7 @@ export default {
             color: null
           },
           noErrors = true;
+      // Проверка количества кубиков
       if ( quant <= 0 || !Number.isInteger(quant) || quant > 100) {
         this.selected.quant.error = true;
         noErrors = false;
@@ -118,6 +113,7 @@ export default {
         this.selected.quant.error = false;
         output.quant = quant;
       }
+      // Проверка количества граней
       if ( faces <= 0 || !Number.isInteger(faces) || faces > 100) {
         this.selected.faces.error = true;
         noErrors = false;
@@ -125,6 +121,7 @@ export default {
         this.selected.faces.error = false;
         output.faces = faces;
       }
+      // Проверка модификатора
       if (!Number.isInteger(modif) || modif > 100 || modif < -100) {
         this.selected.modif.error = true;
         noErrors = false;
@@ -132,6 +129,7 @@ export default {
         this.selected.modif.error = false;
         output.modif = modif;
       }
+      // Проверка цвета
       if (!color) {
         this.selected.color.error = true;
         noErrors = false;
@@ -139,6 +137,7 @@ export default {
         this.selected.color.error = false;
         output.color = color;
       }
+      // Проверка на ошибки и создание
       if (noErrors) {
         this.$store.commit('addDice', output);
         this.closeDicecreator();
